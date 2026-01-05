@@ -1,12 +1,160 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, inital-scale=1.0">
-        <title>My Portfolio</title>
-    </head>
-    <body>
-        <h1>Welcome to My Portfolio</h1>
-        <p>This is where I showcase my projects and skills.</p>
-    </body>
-    </html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | BTS Cloud Computing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-image">
+                    <img src="images/profile.jpg" alt="Profile Picture" class="profile-img">
+                </div>
+                <div class="hero-text">
+                    <h1>Donovan Glodt</h1>
+                    <h2>BTS Cloud Computing Student</h2>
+                    <div class="nav-links">
+                        <a href="#about">About Me</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <p>Welcome to my portfolio! I'm a Cloud Computing student passionate about cloud technologies, DevOps, and building scalable solutions.</p>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-category">
+                    <h3><i class="fas fa-laptop-code"></i> IT Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <i class="fas fa-cloud"></i>
+                            <h4>Cloud Infrastructure</h4>
+                            <p>Microsoft Azure</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-linux"></i>
+                            <i class="fab fa-windows"></i>
+                            <h4>OS Management</h4>
+                            <p>Linux & Windows Servers</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-server"></i>
+                            <h4>Virtualization</h4>
+                            <p>VirtualBox</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-docker"></i>
+                            <h4>Containerization</h4>
+                            <p>Docker</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-cogs"></i>
+                            <h4>MS Power Platform</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-desktop"></i>
+                            <h4>Computer Hardware</h4>
+                            <p>Server & Desktop</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-java"></i>
+                            <i class="fab fa-python"></i>
+                            <h4>Programming</h4>
+                            <p>Java & Python</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-network-wired"></i>
+                            <h4>Networking</h4>
+                            <p>IT Infrastructure</p>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-database"></i>
+                            <h4>Database</h4>
+                            <p>Design & Implementation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category" style="margin-top: 3rem;">
+                    <h3><i class="fas fa-tasks"></i> Project Management</h3>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <i class="fas fa-tasks"></i>
+                            <h4>Resource Planning</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="far fa-clock"></i>
+                            <h4>Time Management</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-file-alt"></i>
+                            <h4>Report Writing</h4>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-project-diagram"></i>
+                            <h4>SCRUM</h4>
+                            <p>Agile Methodology</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Project 1</h3>
+                        <p>Description of project 1</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>Project 2</h3>
+                        <p>Description of project 2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact Me</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> donovanglodt@gmail.com</p>
+                    <p><i class="fab fa-github"></i> github.com/glodo641</p>
+                    <p><i class="fab fa-linkedin"></i> linkedin.com/in/donovan-glodt-251281389</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Donovan Glodt. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
