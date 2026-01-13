@@ -1,8 +1,8 @@
 /* Base Styles & Variables */
 :root {
-    --primary: #8B0000;      /* Dark Red */
-    --primary-dark: #5C0000; /* Darker Red */
-    --secondary: #FF3B3F;    /* Bright Red */
+    --primary: #861313ff;      /* Dark Red */
+    --primary-dark: #610c0cff; /* Darker Red */
+    --secondary: #d32a2dff;    /* Bright Red */
     --dark: #121212;         /* Almost Black */
     --light: #F5F5F5;        /* Off White */
     --transition: all 0.3s ease;
@@ -210,6 +210,7 @@ h2::after {
 /* Skills Section */
 .skills-category {
     margin-bottom: 3rem;
+    position: relative;
 }
 
 .skills-category h3 {
@@ -229,7 +230,7 @@ h2::after {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
-    margin-top: 1rem;
+    margin: 1rem 0;
 }
 
 .skill-card {
@@ -245,6 +246,29 @@ h2::after {
     align-items: center;
     justify-content: center;
     min-height: 160px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skill-card.additional {
+    display: none;
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.skills-category.show-all .skill-card.additional {
+    display: flex;
+    opacity: 1;
+    height: auto;
+    padding: 1.8rem 1rem;
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transform: translateY(0);
 }
 
 .skill-card:hover {
@@ -275,6 +299,39 @@ h2::after {
     line-height: 1.4;
 }
 
+/* Show More Button */
+.show-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 1rem auto 0;
+    transition: all 0.3s ease;
+}
+.show-more-btn:hover {
+    background: rgba(255, 59, 63, 0.1);
+    transform: translateY(-2px);
+}
+.show-more-btn i {
+    transition: transform 0.3s ease;
+}
+.skills-category.show-all .show-more-btn i {
+    transform: rotate(180deg);
+}
+/* Button text is now handled by JavaScript */
+.skills-category .show-more-btn span::after,
+.skills-category.show-all .show-more-btn span::after {
+    content: "";
+    display: none;
+}
+
 /* Multiple icons in skill card */
 .skill-card .fa-stack {
     width: 2.5em;
@@ -288,21 +345,19 @@ h2::after {
 }
 
 /* Responsive adjustments */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .skills-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 }
-
-@media (max-width: 576px) {
+@media (max-width: 480px) {
     .skills-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
     }
     
     .skill-card {
-        padding: 1.5rem 0.5rem;
         min-height: 140px;
+        padding: 1.2rem 0.5rem;
     }
     
     .skill-card i {
@@ -311,10 +366,6 @@ h2::after {
     
     .skill-card h4 {
         font-size: 1rem;
-    }
-    
-    .skill-card p {
-        font-size: 0.8rem;
     }
 }
 
