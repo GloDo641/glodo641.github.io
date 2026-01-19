@@ -153,6 +153,21 @@ a:hover {
     border-color: var(--secondary);
 }
 
+.nav-links .certifications-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+    border: 2px solid transparent;
+    font-weight: 600;
+}
+
+.nav-links .certifications-btn:hover {
+    background: var(--secondary);
+    color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--secondary);
+}
+
 /* Wave Divider */
 .wave {
     position: absolute;
@@ -322,9 +337,7 @@ h2::after {
 .show-more-btn i {
     transition: transform 0.3s ease;
 }
-.skills-category.show-all .show-more-btn i {
-    transform: rotate(180deg);
-}
+
 /* Button text is now handled by JavaScript */
 .skills-category .show-more-btn span::after,
 .skills-category.show-all .show-more-btn span::after {
