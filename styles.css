@@ -164,6 +164,7 @@ a:hover {
     color: var(--light);
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 .hero h2 {
@@ -171,6 +172,16 @@ a:hover {
     color: var(--secondary);
     margin-bottom: 2rem;
     font-weight: 400;
+}
+
+/* Center H2 on additional pages only */
+body:not(.index-page) .hero h2 {
+    text-align: center;
+    display: block;
+    left: auto;
+    transform: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nav-links {
@@ -537,14 +548,14 @@ h2::after {
 }
 
 /* Education Path Section */
-.education-path {
+.learning-path {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
 
-.education-item {
+.learning-item {
     background: rgba(255, 255, 255, 0.03);
     padding: 2.5rem;
     border-radius: var(--border-radius);
@@ -556,7 +567,7 @@ h2::after {
     overflow: hidden;
 }
 
-.education-item::before {
+.learning-item::before {
     content: '';
     position: absolute;
     top: 0;
@@ -566,21 +577,21 @@ h2::after {
     background: linear-gradient(90deg, var(--secondary), var(--primary));
 }
 
-.education-item:hover {
+.learning-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(255, 59, 63, 0.2);
     background: rgba(255, 255, 255, 0.08);
     border-color: var(--secondary);
 }
 
-.education-item h3 {
+.learning-item h3 {
     color: var(--secondary);
     font-size: 1.5rem;
     margin-bottom: 1rem;
     font-weight: 600;
 }
 
-.education-item p {
+.learning-item p {
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.1rem;
     line-height: 1.6;
