@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Fixed Navigation Banner -->
+    <nav class="top-banner">
+        <div class="container">
+            <div class="banner-links">
+                <a href="cv.html" class="banner-link">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>CV</span>
+                </a>
+                <a href="learning.html" class="banner-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Learning Path</span>
+                </a>
+                <a href="workshops.html" class="banner-link">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Workshops</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -23,6 +43,7 @@
                         <a href="#skills">Skills</a>
                         <a href="#certifications" class="certifications-btn">Certifications</a>
                         <a href="#projects">Projects</a>
+                        <a href="#learning-path">Learning Path</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </div>
@@ -69,6 +90,12 @@
                             <h4>OS Management</h4>
                             <p>Linux & Windows Servers</p>
                         </div>
+                        <div class="skill-card priority">
+                            <i class="fab fa-java"></i>
+                            <i class="fab fa-python"></i>
+                            <h4>Programming</h4>
+                            <p>Java & Python</p>
+                        </div>
                         
                         <!-- Additional Skills (Hidden by default) -->
                         <div class="skill-card additional">
@@ -79,17 +106,17 @@
                         <div class="skill-card additional">
                             <i class="fas fa-cogs"></i>
                             <h4>MS Power Platform</h4>
+                            <p>Power Apps, Power Automate</p>
+                        </div>
+                        <div class="skill-card additional">
+                            <i class="fab fa-microsoft"></i>
+                            <h4>Microsoft Office</h4>
+                            <p>Word, Excel, PowerPoint</p>
                         </div>
                         <div class="skill-card additional">
                             <i class="fas fa-desktop"></i>
                             <h4>Computer Hardware</h4>
                             <p>Server & Desktop</p>
-                        </div>
-                        <div class="skill-card additional">
-                            <i class="fab fa-java"></i>
-                            <i class="fab fa-python"></i>
-                            <h4>Programming</h4>
-                            <p>Java & Python</p>
                         </div>
                         <div class="skill-card additional">
                             <i class="fas fa-network-wired"></i>
@@ -145,28 +172,26 @@
             <div class="container">
                 <h2>Certifications</h2>
                 <div class="certifications-grid">
-                    <!-- Example Certification - Replace with your Credly embeds -->
-                    <div class="certification-card">
-                        <div class="certification-badge">
-                            <img src="https://images.credly.com/size/340x340/images/5df82cee-c54c-4006-b17d-ff9a5127beeb/image.png  " alt="Microsoft Office Specialist: Associate (Microsoft 365 Apps)" class="certification-img">
-                        </div>
-                        <div class="certification-info">
+                    <!-- Example Certification - Replace with your Credly badges -->
+                    <a href="https://www.credly.com/badges/a45e73bd-5484-4991-b77b-7b6e9cbbc70e/public_url" class="certification-card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="certification-card">
+                            <div class="certification-image">
+                                <img src="https://images.credly.com/size/340x340/images/5df82cee-c54c-4006-b17d-ff9a5127beeb/image.png" alt="Microsoft Office Specialist: Associate (Microsoft 365 Apps)">
+                            </div>
                             <h3>Microsoft Office Specialist: Associate (Microsoft 365 Apps)</h3>
-                            <p>Microsoft</p>
-                            <a href="https://www.credly.com/badges/a45e73bd-5484-4991-b77b-7b6e9cbbc70e/public_url" class="btn-view" target="_blank" rel="noopener noreferrer">View Credential</a>
+                            <h4>Microsoft</h4>
                         </div>
-                    </div>
+                    </a>
                     
-                    <div class="certification-card">
-                        <div class="certification-badge">
-                            <img src="test.png" alt="Test" class="certification-img">
+                    <a href="https://www.credly.com/badges/e860076c-a7e8-44cf-b9bb-ca5d7efd877c/public_url" class="certification-card-link" target="_blank" rel="noopener noreferrer">
+                        <div class="certification-card">
+                            <div class="certification-image">
+                                <img src="https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png" alt="Microsoft Certified: Azure Fundamentals">
+                            </div>
+                            <h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3>
+                            <h4>Microsoft Azure</h4>
                         </div>
-                        <div class="certification-info">
-                            <h3>Test</h3>
-                            <p>Test</p>
-                            <a href="#" class="btn-view" target="_blank" rel="noopener noreferrer">View Credential</a>
-                        </div>
-                    </div>
+                    </a>
                     
                     <!-- Add more certification cards as needed -->
                 </div>
@@ -184,6 +209,30 @@
                     <div class="project-card">
                         <h3>Project 2</h3>
                         <p>Description of project 2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Workshops" class="section">
+            <div class="container">
+                <h2>Workshops</h2>
+                <div class="workshops">
+                    <div class="workshop-item">
+                        <h3>Datacentre visit LuxConnect</h3>
+                        <p>Site visit to understand datacentre operations and infrastructure</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Learning path" class="section">
+            <div class="container">
+                <h2>Learning Path</h2>
+                <div class="learning-path">
+                    <div class="learning-item">
+                        <h3>Lycée Guillaume Kroll</h3>
+                        <p>Brevet technicien supérieur (BTS) - Cloud Computing</p>
                     </div>
                 </div>
             </div>
