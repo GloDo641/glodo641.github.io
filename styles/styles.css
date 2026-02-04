@@ -346,6 +346,10 @@ h2::after {
     transform: translateY(0);
 }
 
+.certifications-grid.show-all .certification-card-link.additional {
+    display: flex;
+}
+
 .skill-card i {
     font-size: 2.2rem;
     color: var(--secondary);
@@ -383,10 +387,12 @@ h2::after {
     margin: 1rem auto 0;
     transition: all 0.3s ease;
 }
+
 .show-more-btn:hover {
     background: rgba(255, 59, 63, 0.1);
     transform: translateY(-2px);
 }
+
 .show-more-btn i {
     transition: transform 0.3s ease;
 }
@@ -444,9 +450,21 @@ h2::after {
 }
 
 .certification-card-link {
-    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
     color: inherit;
     transition: var(--transition);
+}
+
+.certification-card-link.additional {
+    display: none;
+}
+
+.certification-badge-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .certification-card {
@@ -460,7 +478,7 @@ h2::after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 320px;
     cursor: pointer;
 }
@@ -496,11 +514,57 @@ h2::after {
     line-height: 1.3;
 }
 
+.certification-card h4,
 .certification-card p {
     color: var(--secondary);
     font-size: 1rem;
     margin: 0.3rem 0 0;
     font-weight: 500;
+}
+
+/* Generic button-style link (used for downloads + score reports) */
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-download:hover {
+    background: rgba(255, 59, 63, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-download:active {
+    transform: translateY(0);
+}
+
+.score-report-link {
+    margin: 0 auto;
+    width: fit-content;
+    max-width: 220px;
+}
+
+.score-report-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.score-report-links .btn-download {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.9rem;
 }
 
 /* Workshops Section */
@@ -519,13 +583,6 @@ h2::after {
     transition: var(--transition);
     border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(5px);
-}
-
-.workshop-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 59, 63, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--secondary);
 }
 
 .workshop-item h3 {
@@ -558,23 +615,6 @@ h2::after {
     backdrop-filter: blur(5px);
     position: relative;
     overflow: hidden;
-}
-
-.learning-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--secondary), var(--primary));
-}
-
-.learning-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 59, 63, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--secondary);
 }
 
 .learning-item h3 {
@@ -646,12 +686,6 @@ h2::after {
     overflow: hidden;
     transition: var(--transition);
     border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    border-color: var(--secondary);
 }
 
 .project-card h3 {
