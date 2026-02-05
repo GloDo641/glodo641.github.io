@@ -540,6 +540,34 @@ h2::after {
     transition: all 0.3s ease;
 }
 
+.banner-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.banner-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.banner-link.active {
+    background: rgba(255, 59, 63, 0.3);
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
 .btn-download:hover {
     background: rgba(255, 59, 63, 0.1);
     transform: translateY(-2px);
