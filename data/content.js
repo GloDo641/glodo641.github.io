@@ -160,23 +160,77 @@ const PORTFOLIO = {
   ],
 
   // ── WORKSHOPS ─────────────────────────────────────────────
-  workshops: [
-    {
-      title:       "Datacentre Visit — LuxConnect",
-      description: "Site visit to understand datacentre operations and infrastructure.",
-      link:        "../old/pages/workshops.html"
-    },
-    {
-      title:       "AZ - 040 PowerShell",
-      description: "A week-long workshop on PowerShell scripting and automation for Windows administration.",
-      link:        "../old/pages/workshops.html"
-    },
-    {
-      title:       "External Speakers",
-      description: "Lectures from external speakers on a variety of topics.",
-      link:        "../old/pages/workshops.html"
-    }
-  ],
+  // visits[]:         site visits with learnings lists
+  // speakers[]:       major external speakers (full card)
+  // smallerSpeakers[]: one-session talks — just name + topic
+  workshops: {
+    visits: [
+      {
+        title:       "Datacentre Visit — LuxConnect",
+        description: "Comprehensive site visit to LuxConnect to understand datacentre operations and enterprise infrastructure. Gained hands-on exposure to large-scale hardware, network architecture, and physical security practices.",
+        location:    "LuxConnect, Bettembourg, Luxembourg",
+        date:        "09/01/2026",
+        learnings: [
+          "Datacentre infrastructure design and physical layout",
+          "Cooling and power management systems",
+          "Physical security measures and access control",
+          "Disaster recovery and backup strategies",
+          "How they work with clients and provide infrastructure services"
+        ]
+      },
+      {
+        title:       "AWS re:Invent 2026 — Arhs Group",
+        description: "Presentations on multiple cloud infrastructures, AI services, and enterprise solutions.",
+        location:    "Arhs Group, Belval, Luxembourg",
+        date:        "04/03/2026",
+        learnings: [
+          "Cloud infrastructure and AWS services",
+          "AI and machine learning services",
+          "Enterprise cloud solutions"
+        ]
+      },
+      {
+        title:       "Visite Armée du Luxembourg",
+        description: "Site visit of the Army of Luxembourg to understand military IT infrastructure, telecommunications, and security.",
+        location:    "Härebierg, Diekirch, Luxembourg",
+        date:        "13/03/2026",
+        learnings: [
+          "Satellite communication systems and military operations",
+          "Military IT infrastructure and cybersecurity practices",
+          "Site exploration and understanding of military functions"
+        ]
+      }
+    ],
+
+    speakers: [
+      {
+        name:        "Xavier Nix",
+        description: "Provided in-depth training on Microsoft Azure Fundamentals and guided our class through preparation for the AZ-900 certification exam. \n" + 
+        "Covered one lecture for the PL-900 course about the Power Platform fundamentals. \n" +
+        "Held a week long session on PowerShell scripting and automation as part of the AZ-040 content.",
+        learnings: [
+          "Microsoft Azure core concepts and cloud service models",
+          "AZ-900 certification exam structure and preparation",
+          "Microsoft Power Platform fundamentals, including Power Apps and Power Automate",
+          "PowerShell scripting for Windows server administration",
+          "Microsoft Azure CLI and PowerShell cmdlets"
+        ]
+      }
+    ],
+
+    smallerSpeakers: [
+      { name: "Alain Hitzig", topic: "Quantum Computing",  
+        description: "Introduction to quantum computing principles, applications, and future implications for cloud infrastructure and risks in cybersecurity." },
+      { name: "Christian Stemmler", topic: "Cloud Sustainability",  
+        description: "Lecture on the environmental impact of cloud computing and how the industry is working towards more sustainable infrastructure." },
+      { name: "Yves Schlüter",      topic: "Interview Simulations", 
+        description: "Practical session simulating real job interviews, with feedback on communication, technical answers, professional presentation, and CVs and cover letters." },
+      { name: "Restena",            topic: "Phishing Defense",      
+        description: "Presentation on phishing attack techniques and how to identify and prevent them." },
+      { name: "Fabio Wiethoff",      topic: "Picture yourself", 
+        description: "Lecture on how to present yourself confidently in stance and posture for interviews and presentations. Made our photos for the portfolio." },
+    ]
+  },
 
   // ── EDUCATION ─────────────────────────────────────────────
   education: [

@@ -32,7 +32,8 @@ function buildNav() {
   if (!links) return;
 
   const pages = [
-    { href: 'projects.html', label: 'Projects' },
+    { href: 'projects.html',   label: 'Projects'   },
+    { href: 'workshops.html',  label: 'Workshops'  },
   ];
 
   pages.forEach(({ href, label }) => {

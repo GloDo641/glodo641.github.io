@@ -55,7 +55,8 @@ function populateNav() {
   if (!links) return;
 
   const pages = [
-    { href: 'projects.html', label: 'Projects' },
+    { href: 'projects.html',   label: 'Projects'   },
+    { href: 'workshops.html',  label: 'Workshops'  },
   ];
 
   pages.forEach(({ href, label }) => {
@@ -339,22 +340,38 @@ function populateWorkshops() {
   container.appendChild(sectionHeading('Hands-on Experience', 'Workshops'));
 
   const grid = el('div', 'list-grid fade-up');
+  const { visits, speakers } = PORTFOLIO.workshops;
 
-  PORTFOLIO.workshops.forEach(w => {
+  visits.forEach(v => {
     const card = el('div', 'list-card');
-
-    const icon = el('div', 'list-icon', '◆');
-    card.appendChild(icon);
-
+    card.appendChild(el('div', 'list-icon', '◆'));
     const body = el('div', 'list-body');
-    body.appendChild(el('div', 'list-title', w.title));
-    body.appendChild(el('div', 'list-desc', w.description));
+    body.appendChild(el('div', 'list-title', v.title));
+    body.appendChild(el('div', 'list-desc', v.description));
     card.appendChild(body);
+    grid.appendChild(card);
+  });
 
+  speakers.forEach(s => {
+    const card = el('div', 'list-card');
+    card.appendChild(el('div', 'list-icon', '◆'));
+    const body = el('div', 'list-body');
+    body.appendChild(el('div', 'list-title', s.name));
+    body.appendChild(el('div', 'list-desc', s.description));
+    card.appendChild(body);
     grid.appendChild(card);
   });
 
   container.appendChild(grid);
+
+  const cta = el('div', 'section-cta fade-up');
+  const link = document.createElement('a');
+  link.href      = 'workshops.html';
+  link.className = 'btn-secondary';
+  link.textContent = 'View All Workshops →';
+  cta.appendChild(link);
+  container.appendChild(cta);
+
   section.appendChild(container);
 }
 
