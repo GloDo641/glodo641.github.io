@@ -116,7 +116,7 @@ function populateHero() {
   imageWrap.style.transitionDelay = '0.15s';
   const ring = el('div', 'profile-ring');
   const img = document.createElement('img');
-  img.src = 'images/profile.jpg';
+  img.src = '../images/profile.jpg';
   img.alt = name;
   ring.appendChild(img);
   imageWrap.appendChild(ring);

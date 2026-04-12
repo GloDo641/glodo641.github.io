@@ -19,7 +19,7 @@ const PORTFOLIO = {
     githubDisplay:  "github.com/glodo641",
     linkedin:       "https://linkedin.com/in/donovan-glodt-251281389",
     linkedinDisplay:"donovan-glodt",
-    cv:             "Documents/CV.pdf"
+    cv:             "../Documents/CV.pdf"
   },
 
   // ── ABOUT ─────────────────────────────────────────────────
@@ -63,7 +63,7 @@ const PORTFOLIO = {
                          "Overall it was a great learning experience and I'm happy with the result.",
       tech:             ["Windows Server 2022", "VPN", "DirectAccess"],
       extraTech:        ["Group Project", "Research", "Documentation"],
-      link:             "Documents/WindowsVPNProjectDocumentation.pdf",
+      link:             "../Documents/WindowsVPNProjectDocumentation.pdf",
       linkLabel:        "Download Documentation",
       status:           "complete"
     },
@@ -75,7 +75,7 @@ const PORTFOLIO = {
       reflection:       null,
       tech:             ["Power Apps", "Power Automate", "API Integration"],
       extraTech:        ["Steam API"],
-      link:             "Documents/SteamAchievementViewer.pdf",
+      link:             "../Documents/SteamAchievementViewer.pdf",
       linkLabel:        "Download Presentation",
       status:           "complete"
     },
@@ -114,7 +114,7 @@ const PORTFOLIO = {
       issuer:      "Microsoft Azure",
       badge:       "https://images.credly.com/size/340x340/images/be8fcaeb-c769-4858-b567-ffaaa73ce8cf/image.png",
       credlyLink:  "https://www.credly.com/badges/e860076c-a7e8-44cf-b9bb-ca5d7efd877c/public_url",
-      pdf:         "Documents/Azure_AZ-900.pdf",
+      pdf:         "../Documents/Azure_AZ-900.pdf",
       priority:    true
     },
     {
@@ -130,7 +130,7 @@ const PORTFOLIO = {
       issuer:      "Microsoft Office",
       badge:       "https://images.credly.com/size/340x340/images/c9ab0811-5167-49b4-9459-7dd2e3d0a192/image.png",
       credlyLink:  "https://www.credly.com/badges/bc00656c-e9ea-441c-bea3-c721c38307b1/public_url",
-      pdf:         "Documents/Microsoft_Word_Expert.pdf",
+      pdf:         "../Documents/Microsoft_Word_Expert.pdf",
       priority:    true
     },
     {
@@ -138,7 +138,7 @@ const PORTFOLIO = {
       issuer:      "Microsoft Office",
       badge:       "https://images.credly.com/size/340x340/images/48efb29e-31ed-414f-899e-088197b10be7/image.png",
       credlyLink:  "https://www.credly.com/badges/d85e653d-e46a-4374-a8ef-0e541230dd33/public_url",
-      pdf:         "Documents/Microsoft_Powerpoint_Associate.pdf",
+      pdf:         "../Documents/Microsoft_Powerpoint_Associate.pdf",
       priority:    false
     },
     {
@@ -146,7 +146,7 @@ const PORTFOLIO = {
       issuer:      "Microsoft Office",
       badge:       "https://images.credly.com/size/340x340/images/323ec4a8-7d1f-486f-9c68-258947965b8e/image.png",
       credlyLink:  "https://www.credly.com/badges/d729030b-1bd6-4534-bebc-2778d39b051a/public_url",
-      pdf:         "Documents/Microsoft_Word_Associate.pdf",
+      pdf:         "../Documents/Microsoft_Word_Associate.pdf",
       priority:    false
     },
     {
@@ -154,7 +154,7 @@ const PORTFOLIO = {
       issuer:      "Microsoft Office",
       badge:       "https://images.credly.com/size/340x340/images/9d2bcbe6-519f-4ed0-ad34-aca077421568/MOS_Excel.png",
       credlyLink:  "https://www.credly.com/badges/1945ba57-862a-4821-8ea5-7ebbb7cd7681/public_url",
-      pdf:         "Documents/Microsoft_Excel_Associate.pdf",
+      pdf:         "../Documents/Microsoft_Excel_Associate.pdf",
       priority:    false
     }
   ],
@@ -164,17 +164,17 @@ const PORTFOLIO = {
     {
       title:       "Datacentre Visit — LuxConnect",
       description: "Site visit to understand datacentre operations and infrastructure.",
-      link:        "old/pages/workshops.html"
+      link:        "../old/pages/workshops.html"
     },
     {
       title:       "AZ - 040 PowerShell",
       description: "A week-long workshop on PowerShell scripting and automation for Windows administration.",
-      link:        "old/pages/workshops.html"
+      link:        "../old/pages/workshops.html"
     },
     {
       title:       "External Speakers",
       description: "Lectures from external speakers on a variety of topics.",
-      link:        "old/pages/workshops.html"
+      link:        "../old/pages/workshops.html"
     }
   ],
 
