@@ -1,2 +1,4 @@
 # Exclude guides folder and all its contents
-guides/
+Guides/
+old/
+CLAUDE.md
