@@ -68,6 +68,24 @@ const PORTFOLIO = {
       status:           "complete"
     },
     {
+      id:               "rockstor-nas",
+      title:            "Server Installation with Rockstor NAS and hardware RAID",
+      description:      "Documentation and installation of a server and installing Rockstor NAS system.",
+      fullDescription:  "This project involved researching and setting up a server from scratch, using resources supplied to us. \n" +
+                        "It involved installing hardware components into a server case, documenting the process, and possible issues that were encountered. \n" +
+                        "Additionally, a hardware RAID configuration was set up to provide redundancy and data protection. \n" +
+                        "The server was then configured to run Rockstor NAS system, which provides a web interface for managing storage and RAID configurations. \n" +
+                        "The project was documented in a report and a presentation was given to demonstrate the software RAID configuration and the Rockstor NAS system. \n\n" +
+                        "The final grade is yet to be given.",
+      reflection:       "This project was an amazing learning experience. I learned a lot about server hardware, RAID configurations, and accessing storages over the network. " +
+                         "I'm happy with the result and the knowledge I gained from this project.",
+      tech:             ["Server Hardware", "Server Configuration", "Linux"],
+      extraTech:        ["Storage Management", "Research", "Documentation"],
+      link:             "../Documents/Rockstor_Installation_Documentation.pdf",
+      linkLabel:        "Download Documentation",
+      status:           "complete"
+    },
+    {
       id:               "steam-viewer",
       title:            "PowerApps & Power Automate — Steam Achievement Viewer",
       description:      "An application built with Power Apps & Power Automate to view Steam achievements for any game.",
