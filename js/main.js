@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   populateProjects();
   populateCertifications();
   populateWorkshops();
-  populateEducation();
+  populateLearning();
   populateContact();
   populateFooter();
 
@@ -55,8 +55,9 @@ function populateNav() {
   if (!links) return;
 
   const pages = [
-    { href: 'projects.html',   label: 'Projects'   },
-    { href: 'workshops.html',  label: 'Workshops'  },
+    { href: 'projects.html',  label: 'Projects'      },
+    { href: 'workshops.html', label: 'Workshops'     },
+    { href: 'learning.html',  label: 'Learning Path' },
   ];
 
   pages.forEach(({ href, label }) => {
@@ -149,16 +150,113 @@ function populateAbout() {
   PORTFOLIO.about.forEach(p => body.appendChild(el('p', '', p)));
 
   const cta = el('div', 'about-cta');
+
   const btnCV = document.createElement('a');
   btnCV.href = cv;
   btnCV.target = '_blank';
   btnCV.className = 'btn-primary';
   btnCV.textContent = 'View Full CV';
 
+  const btnSummary = document.createElement('button');
+  btnSummary.className = 'btn-secondary';
+  btnSummary.textContent = 'CV Summary';
+  btnSummary.addEventListener('click', openCVModal);
+
   cta.appendChild(btnCV);
+  cta.appendChild(btnSummary);
   body.appendChild(cta);
   container.appendChild(body);
   section.appendChild(container);
+
+  buildCVModal();
+}
+
+/* ── CV SUMMARY MODAL ────────────────────────────────────── */
+
+function buildCVCard(title) {
+  const card = el('div', 'cv-summary-card');
+  card.appendChild(el('div', 'cv-summary-card-title', title));
+  return card;
+}
+
+function buildCVModal() {
+  const backdrop = el('div', 'modal-backdrop');
+  backdrop.id = 'cv-modal';
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) backdrop.classList.remove('open'); });
+
+  const box = el('div', 'modal-box');
+
+  const closeBtn = el('button', 'modal-close', '✕');
+  closeBtn.addEventListener('click', () => backdrop.classList.remove('open'));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open'))
+      backdrop.classList.remove('open');
+  });
+  box.appendChild(closeBtn);
+
+  const header = el('div', 'modal-header');
+  header.appendChild(el('h2', 'modal-title', 'CV Summary'));
+  box.appendChild(header);
+
+  const grid = el('div', 'cv-summary-grid');
+
+  // Row 1 — Education | Work Experience
+  const eduCard = buildCVCard('Education');
+  PORTFOLIO.learningPath.education.forEach(edu => {
+    const item = el('div', 'cv-summary-edu-item');
+    item.appendChild(el('div', 'cv-summary-edu-school', edu.school));
+    item.appendChild(el('div', 'cv-summary-edu-degree', edu.degree));
+    item.appendChild(el('span', 'cv-summary-edu-years', edu.years));
+    eduCard.appendChild(item);
+  });
+  grid.appendChild(eduCard);
+
+  const workCard = buildCVCard('Work Experience');
+  PORTFOLIO.workExperience.forEach(job => {
+    const item = el('div', 'cv-summary-edu-item');
+    item.appendChild(el('div', 'cv-summary-edu-school', job.role));
+    item.appendChild(el('div', 'cv-summary-edu-degree', job.company));
+    item.appendChild(el('span', 'cv-summary-edu-years', job.years));
+    if (job.description) item.appendChild(el('p', 'cv-summary-work-desc', job.description));
+    workCard.appendChild(item);
+  });
+  grid.appendChild(workCard);
+
+  // Row 2 — Certifications | Languages
+  const certCard = buildCVCard('Certifications');
+  const certList = el('div', 'cv-summary-list');
+  PORTFOLIO.certifications.filter(c => c.priority).forEach(cert => {
+    certList.appendChild(el('div', 'cv-summary-list-item', cert.title));
+  });
+  certCard.appendChild(certList);
+  grid.appendChild(certCard);
+
+  const langCard = buildCVCard('Languages');
+  const langList = el('div', 'cv-summary-list');
+  PORTFOLIO.languages.forEach(l => {
+    const row = el('div', 'cv-summary-lang-row');
+    row.appendChild(el('span', 'cv-summary-lang-name', l.language));
+    row.appendChild(el('span', 'cv-summary-lang-level', l.level));
+    langList.appendChild(row);
+  });
+  langCard.appendChild(langList);
+  grid.appendChild(langCard);
+
+  // Row 3 — Soft Skills (full width)
+  const softCard = buildCVCard('Soft Skills');
+  softCard.classList.add('cv-summary-card--wide');
+  const softTags = el('div', 'cv-summary-tags');
+  PORTFOLIO.softSkills.forEach(s => softTags.appendChild(el('span', 'skill-tag', s)));
+  softCard.appendChild(softTags);
+  grid.appendChild(softCard);
+
+  box.appendChild(grid);
+  backdrop.appendChild(box);
+  document.body.appendChild(backdrop);
+}
+
+function openCVModal() {
+  document.getElementById('cv-modal').classList.add('open');
 }
 
 /* ── SKILLS ──────────────────────────────────────────────── */
@@ -172,27 +270,32 @@ function populateSkills() {
 
   const groups = el('div', 'skills-groups fade-up');
 
-  // Strip trailing slash for display
-  const categoryLabels = {
-    'cloud/':       'Cloud',
-    'systems/':     'Systems',
-    'networking/':  'Networking',
-    'programming/': 'Programming',
-    'office/':      'Office',
-    'management/':  'Management',
+  const categoryMeta = {
+    'cloud/':       { label: 'Cloud',       icon: 'fa-solid fa-cloud'          },
+    'systems/':     { label: 'Systems',     icon: 'fa-solid fa-server'         },
+    'networking/':  { label: 'Networking',  icon: 'fa-solid fa-network-wired'  },
+    'programming/': { label: 'Programming', icon: 'fa-solid fa-code'           },
+    'scripting/':   { label: 'Scripting',   icon: 'fa-solid fa-terminal'       },
+    'office/':      { label: 'Office',      icon: 'fa-solid fa-briefcase'      },
+    'management/':  { label: 'Management',  icon: 'fa-solid fa-list-check'     },
   };
 
   PORTFOLIO.skills.forEach(skill => {
-    const group = el('div', 'skill-group');
+    const meta = categoryMeta[skill.category] || { label: skill.category.replace('/', ''), icon: 'fa-solid fa-circle' };
+    const card = el('div', 'skill-card');
 
-    const label = categoryLabels[skill.category] || skill.category.replace('/', '');
-    group.appendChild(el('span', 'skill-group-label', label));
+    const header = el('div', 'skill-card-header');
+    const iconBox = el('div', 'skill-card-icon');
+    iconBox.appendChild(el('i', meta.icon));
+    header.appendChild(iconBox);
+    header.appendChild(el('span', 'skill-group-label', meta.label));
+    card.appendChild(header);
 
     const tags = el('div', 'skill-tags');
     skill.items.forEach(item => tags.appendChild(el('span', 'skill-tag', item)));
-    group.appendChild(tags);
+    card.appendChild(tags);
 
-    groups.appendChild(group);
+    groups.appendChild(card);
   });
 
   container.appendChild(groups);
@@ -268,7 +371,7 @@ function populateCertifications() {
 
   const grid = el('div', 'certs-grid fade-up');
 
-  PORTFOLIO.certifications.forEach((cert, i) => {
+  PORTFOLIO.certifications.forEach(cert => {
     const card = el('div', 'cert-card');
     if (!cert.priority) card.style.display = 'none';
 
@@ -339,30 +442,36 @@ function populateWorkshops() {
   const container = el('div', 'container');
   container.appendChild(sectionHeading('Hands-on Experience', 'Workshops'));
 
-  const grid = el('div', 'list-grid fade-up');
   const { visits, speakers } = PORTFOLIO.workshops;
+  const cols = el('div', 'split-columns fade-up');
 
+  // Left: Visits
+  const visitsCol = el('div', 'split-col');
+  visitsCol.appendChild(el('div', 'split-col-title', 'Visits'));
   visits.forEach(v => {
     const card = el('div', 'list-card');
-    card.appendChild(el('div', 'list-icon', '◆'));
     const body = el('div', 'list-body');
     body.appendChild(el('div', 'list-title', v.title));
     body.appendChild(el('div', 'list-desc', v.description));
     card.appendChild(body);
-    grid.appendChild(card);
+    visitsCol.appendChild(card);
   });
+  cols.appendChild(visitsCol);
 
+  // Right: Speakers
+  const speakersCol = el('div', 'split-col');
+  speakersCol.appendChild(el('div', 'split-col-title', 'Speakers'));
   speakers.forEach(s => {
     const card = el('div', 'list-card');
-    card.appendChild(el('div', 'list-icon', '◆'));
     const body = el('div', 'list-body');
     body.appendChild(el('div', 'list-title', s.name));
     body.appendChild(el('div', 'list-desc', s.description));
     card.appendChild(body);
-    grid.appendChild(card);
+    speakersCol.appendChild(card);
   });
+  cols.appendChild(speakersCol);
 
-  container.appendChild(grid);
+  container.appendChild(cols);
 
   const cta = el('div', 'section-cta fade-up');
   const link = document.createElement('a');
@@ -375,27 +484,47 @@ function populateWorkshops() {
   section.appendChild(container);
 }
 
-/* ── EDUCATION ───────────────────────────────────────────── */
+/* ── LEARNING PATH ───────────────────────────────────────── */
 
-function populateEducation() {
-  const section = document.getElementById('education');
+function populateLearning() {
+  const section = document.getElementById('learning');
   if (!section) return;
 
   const container = el('div', 'container');
-  container.appendChild(sectionHeading('Academic Background', 'Education'));
+  container.appendChild(sectionHeading('Studies', 'Learning Path'));
 
-  const grid = el('div', 'edu-grid fade-up');
+  const { education, onlineCourses } = PORTFOLIO.learningPath;
+  const cols = el('div', 'split-columns fade-up');
 
-  PORTFOLIO.education.forEach(edu => {
+  // Left: Education
+  const eduCol = el('div', 'split-col');
+  eduCol.appendChild(el('div', 'split-col-title', 'Education'));
+  education.forEach(edu => {
     const card = el('div', 'edu-card');
     card.appendChild(el('div', 'edu-years', edu.years));
     card.appendChild(el('div', 'edu-school', edu.school));
     card.appendChild(el('div', 'edu-degree', edu.degree));
     card.appendChild(el('div', 'edu-location', edu.location));
-    grid.appendChild(card);
+    if (edu.description) card.appendChild(el('p', 'edu-desc', edu.description));
+    eduCol.appendChild(card);
   });
+  cols.appendChild(eduCol);
 
-  container.appendChild(grid);
+  // Right: Online Courses
+  const courseCol = el('div', 'split-col');
+  courseCol.appendChild(el('div', 'split-col-title', 'Online Courses'));
+  onlineCourses.forEach(course => {
+    const card = el('div', 'list-card');
+    const body = el('div', 'list-body');
+    body.appendChild(el('div', 'list-title', course.title));
+    if (course.platform)    body.appendChild(el('div', 'list-desc', course.platform));
+    if (course.description) body.appendChild(el('p',   'list-desc', course.description));
+    card.appendChild(body);
+    courseCol.appendChild(card);
+  });
+  cols.appendChild(courseCol);
+
+  container.appendChild(cols);
   section.appendChild(container);
 }
 
@@ -405,7 +534,7 @@ function populateContact() {
   const section = document.getElementById('contact');
   if (!section) return;
 
-  const { email, github, githubDisplay, linkedin, linkedinDisplay } = PORTFOLIO.identity;
+  const { email, linkedin, linkedinDisplay } = PORTFOLIO.identity;
 
   const container = el('div', 'container');
   container.appendChild(sectionHeading('Get in touch', 'Contact'));

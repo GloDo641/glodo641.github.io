@@ -29,6 +29,34 @@ const PORTFOLIO = {
     "This portfolio showcases all that I have learned on my path and what I have accomplished throughout my studies."
   ],
 
+  // ── SOFT SKILLS ───────────────────────────────────────────
+  // Shown in the CV Summary panel on the home page.
+  softSkills: [
+    "Communication", "Teamwork", "Problem Solving",
+    "Time Management", "Adaptability", "Attention to Detail",
+    "Self-learning", "Documentation"
+  ],
+
+  // ── LANGUAGES ─────────────────────────────────────────────
+  // level: any string, e.g. "Native", "Fluent", "Professional", "B2", etc.
+  languages: [
+    { language: "Luxembourgish", level: "Native"       },
+    { language: "English",       level: "Native"       },
+    { language: "German",        level: "C1"        },
+    { language: "French",        level: "C1"       }
+  ],
+
+  // ── WORK EXPERIENCE ───────────────────────────────────────
+  // role, company, years, description (set null to hide description)
+  workExperience: [
+    {
+      role:        "Academic Internship",
+      company:     "CTIE - Centre des technologies et informations d'État",
+      years:       "03/2024 (1 week)",
+      description: "Analysis of the organisation's proceedures in the state administration"
+    }
+  ],
+
   // ── SKILLS ────────────────────────────────────────────────
   // Each entry is a directory-like category with a list of skills.
   skills: [
@@ -258,20 +286,60 @@ const PORTFOLIO = {
     ]
   },
 
-  // ── EDUCATION ─────────────────────────────────────────────
-  education: [
-    {
-      school:   "Lycée Guillaume Kroll",
-      degree:   "BTS — Cloud Computing",
-      years:    "2025 - Present",
-      location: "Luxembourg"
-    },
-    {
-      school:   "Pluralsight Courses",
-      degree:   "Cloud Computing & IT Courses",
-      years:    "During studies",
-      location: "Online"
-    }
-  ]
+  // ── LEARNING PATH ─────────────────────────────────────────
+  // education[]:     formal studies
+  //   subjects[]:    semesters — each has a semester label and a courses[] array
+  //     courses[]:   { name, description } — individual subjects/modules
+  //   reflection:    personal reflection paragraph (null to hide)
+  // onlineCourses[]: self-study courses, platforms, etc.
+  learningPath: {
+    education: [
+      {
+        school:      "Lycée Guillaume Kroll",
+        degree:      "BTS — Cloud Computing",
+        years:       "2025 - Present",
+        location:    "Luxembourg",
+        description: "The BTS Cloud Computing programme is about cloud infrastructure, virtualization, security, and management. We learn a lot about different services, tools and technologies used in the cloud to build infrastructure, deploy applications, and manage cloud environments.",
+        subjects: [
+          {
+            semester: "Semester 2",
+            courses: [
+              { name: "IT Automation 2", description: "Learned how to create and use Bash and Powershell scripts for automation." },
+              { name: "IT Security 2",   description: "Learned about cryptography and digital signatures." }
+            ]
+          },
+          {
+            semester: "Semester 1",
+            courses: [
+              { name: "IT Automation 1", description: "Learned about automation flows along with Power Automate and Power Apps." },
+              { name: "IT Security 1",   description: "Learned about different attack vectors and how to protect against them. Covered topics like phishing, malware, and network security." },
+              { name: "IT Networking 1", description: "Covered network topologies, IP addressing, configuring switches and routers. Learned using Cisco Packet Tracer." },
+              { name: "Cloud Infrastructure 1", description: "Learned about computer hardware and held presentations about them." },
+              { name: "Operating Systems Linux", description: "Learned about Linux distributions and command line interface. Learned how to configure users, permissions, services, storage and networking of Linux systems." }
+            ]
+          }
+          // add more semesters: { semester: "Semester 2", courses: [...] }
+        ],
+        reflection: "Test"   // your personal reflection on the programme overall
+      }
+    ],
+    onlineCourses: [
+      {
+        title:       "AZ-900: Microsoft Azure Fundamentals",
+        platform:    "Pluralsight",
+        description: null   // optional description of what you cover
+      },
+      {
+        title:       "AZ-040: Microsoft Azure Administration",
+        platform:    "Pluralsight",
+        description: null   // optional description of what you cover
+      },
+      {
+        title:       "The System Administrator's Guide to Bash Scripting",
+        platform:    "Pluralsight",
+        description: null   // optional description of what you cover
+      }
+    ]
+  }
 
 };

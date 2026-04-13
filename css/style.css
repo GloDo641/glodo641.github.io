@@ -373,29 +373,45 @@ img { display: block; max-width: 100%; }
 
 /* ── SKILLS ──────────────────────────────────────────────── */
 .skills-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-.skill-group {
-  display: grid;
-  grid-template-columns: 140px 1fr;
   gap: 1rem;
-  align-items: start;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
 }
 
-.skill-group:last-child { border-bottom: none; }
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skill-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(196, 30, 30, 0.12);
+  border: 1px solid rgba(196, 30, 30, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 14px;
+  flex-shrink: 0;
+}
 
 .skill-group-label {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding-top: 0.3rem;
+  color: var(--text-bright);
 }
 
 .skill-tags {
@@ -654,6 +670,31 @@ img { display: block; max-width: 100%; }
   line-height: 1.6;
 }
 
+/* ── SPLIT COLUMNS (Workshops & Learning Path) ───────────── */
+.split-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.split-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.split-col-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
 /* ── EDUCATION ───────────────────────────────────────────── */
 .edu-grid {
   display: grid;
@@ -695,6 +736,13 @@ img { display: block; max-width: 100%; }
   font-size: 14px;
   color: var(--text-muted);
   opacity: 0.7;
+}
+
+.edu-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 0.75rem;
 }
 
 /* ── CONTACT ─────────────────────────────────────────────── */
@@ -777,8 +825,7 @@ footer {
   .hero-content { flex-direction: column-reverse; align-items: flex-start; gap: 2.5rem; }
   .profile-ring { width: 240px; height: 310px; }
   .projects-grid { grid-template-columns: 1fr; }
-  .skill-group { grid-template-columns: 1fr; gap: 0.5rem; }
-  .skill-group-label { padding-top: 0; }
+
 }
 
 @media (max-width: 768px) {
@@ -802,6 +849,7 @@ footer {
   .container { padding: 0 1.25rem; }
   .certs-grid { grid-template-columns: repeat(2, 1fr); }
   .list-grid { grid-template-columns: 1fr; }
+  .split-columns { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .about-body { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
@@ -1166,6 +1214,116 @@ footer {
   .modal-box  { padding: 1.5rem; }
 }
 
+/* ── CV SUMMARY MODAL ────────────────────────────────────── */
+.cv-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.cv-summary-card--wide {
+  grid-column: 1 / -1;
+}
+
+.cv-summary-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cv-summary-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cv-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cv-summary-list-item {
+  font-size: 14px;
+  color: var(--text);
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--accent);
+  line-height: 1.4;
+}
+
+.cv-summary-edu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cv-summary-edu-school {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.cv-summary-edu-degree {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.cv-summary-edu-years {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cv-summary-work-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 0.2rem;
+}
+
+.cv-summary-lang-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-summary-lang-row:last-child {
+  border-bottom: none;
+}
+
+.cv-summary-lang-name {
+  color: var(--text-bright);
+  font-weight: 500;
+}
+
+.cv-summary-lang-level {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .cv-summary-grid { grid-template-columns: 1fr; }
+}
+
 /* ── Projects page responsive ────────────────────────────── */
 @media (max-width: 960px) {
   .project-row {
@@ -1360,4 +1518,77 @@ footer {
   .wshop-card-meta    { text-align: left; }
   .wshop-small-card   { padding: 0.25rem 1.25rem; }
   .wshop-small-name   { min-width: 130px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LEARNING PATH PAGE
+═══════════════════════════════════════════════════════════ */
+
+/* Shared label style for subsections inside an edu card */
+.lpath-block-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Subjects & Modules ───────────────────────────────── */
+.lpath-subjects {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.lpath-semester-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.lpath-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.lpath-subject-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+}
+
+.lpath-subject-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 0.35rem;
+}
+
+.lpath-subject-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ── Personal Reflection ──────────────────────────────── */
+.lpath-reflection {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.lpath-reflection-text {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-style: italic;
 }

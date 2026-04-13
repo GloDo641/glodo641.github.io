@@ -1,7 +1,7 @@
 /* ─────────────────────────────────────────────────────────────
-   WORKSHOPS PAGE — workshops.js
+   LEARNING PATH PAGE — learning.js
    Reads PORTFOLIO from data/content.js and renders the full
-   workshops page: nav, hero, visits section, external speakers.
+   learning path page: nav, hero, education section, online courses.
 ───────────────────────────────────────────────────────────── */
 
 /* ── HELPERS ─────────────────────────────────────────────── */
@@ -37,7 +37,7 @@ function buildNav() {
   pages.forEach(({ href, label }) => {
     const a = el('a', '', label);
     a.href = href;
-    if (href === 'workshops.html') a.classList.add('active');
+    if (href === 'learning.html') a.classList.add('active');
     links.appendChild(a);
   });
 
@@ -60,42 +60,66 @@ function sectionHeading(label, title) {
   return wrap;
 }
 
-/* ── CARD BUILDER ────────────────────────────────────────── */
+/* ── EDUCATION CARD BUILDER ──────────────────────────────── */
 
-// Builds a full workshop card (visit or major speaker).
-// metaLines: optional array of strings shown top-right (date, location, etc.)
-function buildCard(title, description, learnings, metaLines) {
+function buildEduCard(edu) {
   const card = el('div', 'wshop-card');
 
-  // Header: title + optional meta
+  // Header: school name + meta (degree, years · location)
   const header = el('div', 'wshop-card-header');
-  header.appendChild(el('div', 'wshop-card-title', title));
+  header.appendChild(el('div', 'wshop-card-title', edu.school));
 
-  if (metaLines && metaLines.length) {
-    const meta = el('div', 'wshop-card-meta');
-    metaLines.forEach(line => {
-      const p = document.createElement('p');
-      p.textContent = line;
-      meta.appendChild(p);
-    });
-    header.appendChild(meta);
-  }
+  const meta = el('div', 'wshop-card-meta');
+  [edu.degree, `${edu.years} · ${edu.location}`].forEach(line => {
+    const p = document.createElement('p');
+    p.textContent = line;
+    meta.appendChild(p);
+  });
+  header.appendChild(meta);
   card.appendChild(header);
 
-  // Description — \n renders as a line break
-  if (description) {
+  // Programme description
+  if (edu.description) {
     const p = el('p', 'wshop-card-desc');
-    p.innerHTML = description.replace(/\n/g, '<br>');
+    p.innerHTML = edu.description.replace(/\n/g, '<br>');
     card.appendChild(p);
   }
 
-  // Key learnings list
-  if (learnings && learnings.length) {
-    const wrap = el('div', 'wshop-learnings');
-    wrap.appendChild(el('div', 'wshop-learnings-label', 'Key Learnings'));
-    const ul = el('ul', 'wshop-learnings-list');
-    learnings.forEach(item => ul.appendChild(el('li', '', item)));
-    wrap.appendChild(ul);
+  // Subjects & Modules — grouped by semester
+  if (edu.subjects && edu.subjects.length) {
+    const wrap = el('div', 'lpath-subjects');
+    wrap.appendChild(el('div', 'lpath-block-label', 'Subjects & Modules'));
+
+    edu.subjects.forEach(sem => {
+      const semWrap = el('div', 'lpath-semester');
+      semWrap.appendChild(el('div', 'lpath-semester-label', sem.semester));
+
+      const grid = el('div', 'lpath-subjects-grid');
+      sem.courses.forEach(course => {
+        const subjCard = el('div', 'lpath-subject-card');
+        subjCard.appendChild(el('div', 'lpath-subject-name', course.name));
+        if (course.description) {
+          const p = el('p', 'lpath-subject-desc');
+          p.innerHTML = course.description.replace(/\n/g, '<br>');
+          subjCard.appendChild(p);
+        }
+        grid.appendChild(subjCard);
+      });
+
+      semWrap.appendChild(grid);
+      wrap.appendChild(semWrap);
+    });
+
+    card.appendChild(wrap);
+  }
+
+  // Personal Reflection
+  if (edu.reflection) {
+    const wrap = el('div', 'lpath-reflection');
+    wrap.appendChild(el('div', 'lpath-block-label', 'Personal Reflection'));
+    const p = el('p', 'lpath-reflection-text');
+    p.innerHTML = edu.reflection.replace(/\n/g, '<br>');
+    wrap.appendChild(p);
     card.appendChild(wrap);
   }
 
@@ -105,22 +129,20 @@ function buildCard(title, description, learnings, metaLines) {
 /* ── PAGE BUILDER ────────────────────────────────────────── */
 
 function buildPage() {
-  const main = document.getElementById('workshops-main');
+  const main = document.getElementById('learning-main');
   if (!main) return;
 
-  const { visits, speakers, smallerSpeakers } = PORTFOLIO.workshops;
+  const { education, onlineCourses } = PORTFOLIO.learningPath;
 
   // ── HERO ──────────────────────────────────────────────────
   const hero = el('div', 'page-hero');
-
-  const overlay = el('div', 'page-hero-overlay');
-  hero.appendChild(overlay);
+  hero.appendChild(el('div', 'page-hero-overlay'));
 
   const heroInner = el('div', 'container page-hero-inner');
-  heroInner.appendChild(el('p',   'page-hero-label', 'External Experience'));
-  heroInner.appendChild(el('h1',  'page-hero-title', 'Workshops'));
+  heroInner.appendChild(el('p',   'page-hero-label', 'Studies & Growth'));
+  heroInner.appendChild(el('h1',  'page-hero-title', 'Learning Path'));
   heroInner.appendChild(el('div', 'page-hero-rule'));
-  heroInner.appendChild(el('p',   'page-hero-sub',   'Site visits, lectures & external talks'));
+  heroInner.appendChild(el('p',   'page-hero-sub',   'Education, courses & self-study'));
   hero.appendChild(heroInner);
 
   const wave = el('div', 'hero-wave');
@@ -137,70 +159,45 @@ function buildPage() {
   content.appendChild(container);
   main.appendChild(content);
 
-  // ── VISITS ────────────────────────────────────────────────
-  if (visits && visits.length) {
+  // ── EDUCATION SECTION ─────────────────────────────────────
+  if (education && education.length) {
     const sec = el('div', 'wshop-section');
-    sec.appendChild(sectionHeading('Places & Events', 'Visits'));
+    sec.appendChild(sectionHeading('Formal Studies', 'Education'));
 
     const cards = el('div', 'wshop-cards');
-    visits.forEach(v => {
-      const meta = [];
-      if (v.date)     meta.push(v.date);
-      if (v.location) meta.push(v.location);
-      cards.appendChild(buildCard(v.title, v.description, v.learnings, meta));
-    });
-
+    education.forEach(edu => cards.appendChild(buildEduCard(edu)));
     sec.appendChild(cards);
     sections.appendChild(sec);
   }
 
-  // ── EXTERNAL SPEAKERS ─────────────────────────────────────
-  const hasSpeakers = speakers && speakers.length;
-  const hasSmaller  = smallerSpeakers && smallerSpeakers.length;
-
-  if (hasSpeakers || hasSmaller) {
+  // ── ONLINE COURSES SECTION ────────────────────────────────
+  if (onlineCourses && onlineCourses.length) {
     const sec = el('div', 'wshop-section');
-    sec.appendChild(sectionHeading('Guest Lectures', 'External Speakers'));
+    sec.appendChild(sectionHeading('Self-Study', 'Online Courses'));
 
-    const cards = el('div', 'wshop-cards');
+    const card = el('div', 'wshop-small-card');
+    const list = el('div', 'wshop-small-list');
 
-    // Full speaker cards
-    if (hasSpeakers) {
-      speakers.forEach(s => {
-        cards.appendChild(buildCard(s.name, s.description, s.learnings, null));
-      });
-    }
+    onlineCourses.forEach(course => {
+      const item = el('div', 'wshop-small-item');
 
-    // Smaller speakers — compact list under a sub-label
-    if (hasSmaller) {
-      cards.appendChild(el('div', 'wshop-subsection-label', 'One-Session Lectures'));
+      const row = el('div', 'wshop-small-row');
+      row.appendChild(el('span', 'wshop-small-name',  course.title));
+      row.appendChild(el('span', 'wshop-small-dash',  '—'));
+      row.appendChild(el('span', 'wshop-small-topic', course.platform));
+      item.appendChild(row);
 
-      const smallCard = el('div', 'wshop-small-card');
-      const list      = el('div', 'wshop-small-list');
+      if (course.description) {
+        const p = el('p', 'wshop-small-desc');
+        p.innerHTML = course.description.replace(/\n/g, '<br>');
+        item.appendChild(p);
+      }
 
-      smallerSpeakers.forEach(sp => {
-        const item = el('div', 'wshop-small-item');
+      list.appendChild(item);
+    });
 
-        const row = el('div', 'wshop-small-row');
-        row.appendChild(el('span', 'wshop-small-name',  sp.name));
-        row.appendChild(el('span', 'wshop-small-dash',  '—'));
-        row.appendChild(el('span', 'wshop-small-topic', sp.topic));
-        item.appendChild(row);
-
-        if (sp.description) {
-          const p = el('p', 'wshop-small-desc');
-          p.innerHTML = sp.description.replace(/\n/g, '<br>');
-          item.appendChild(p);
-        }
-
-        list.appendChild(item);
-      });
-
-      smallCard.appendChild(list);
-      cards.appendChild(smallCard);
-    }
-
-    sec.appendChild(cards);
+    card.appendChild(list);
+    sec.appendChild(card);
     sections.appendChild(sec);
   }
 }
