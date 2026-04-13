@@ -51,23 +51,6 @@ const PORTFOLIO = {
   // extraTech:       EXTRA tags — appear only inside the detail pop-up
   projects: [
     {
-      id:               "vpn-setup",
-      title:            "Windows Server 2022 VPN & DirectAccess Setup",
-      description:      "Implementation and configuration of VPN and DirectAccess services on Windows Server 2022.",
-      fullDescription:  "This project involved setting up and configuring VPN and DirectAccess services on a Windows Server 2022 environment. " +
-                       "The goal was to provide secure remote access to the organization's network. \n\n " +
-                       "This project was done with another student as part of a school group project. " +
-                       "We worked together to research, configure, and document the setup process. \n\n " +
-                       "The final grade was 6.3 out of 8.",
-      reflection:       "This project went in all great, only some mistakes in the setup of the network between the virtual machines. " +
-                         "Overall it was a great learning experience and I'm happy with the result.",
-      tech:             ["Windows Server 2022", "VPN", "DirectAccess"],
-      extraTech:        ["Group Project", "Research", "Documentation"],
-      link:             "../Documents/WindowsVPNProjectDocumentation.pdf",
-      linkLabel:        "Download Documentation",
-      status:           "complete"
-    },
-    {
       id:               "rockstor-nas",
       title:            "Server Installation with Rockstor NAS and hardware RAID",
       description:      "Documentation and installation of a server and installing Rockstor NAS system.",
@@ -78,10 +61,28 @@ const PORTFOLIO = {
                         "The project was documented in a report and a presentation was given to demonstrate the software RAID configuration and the Rockstor NAS system. \n\n" +
                         "The final grade is yet to be given.",
       reflection:       "This project was an amazing learning experience. I learned a lot about server hardware, RAID configurations, and accessing storages over the network. " +
-                         "I'm happy with the result and the knowledge I gained from this project.",
-      tech:             ["Server Hardware", "Server Configuration", "Linux"],
+                        "I'm happy with the result and the knowledge I gained from this project.",
+      tech:             ["Server Hardware", "Server Configuration", "Linux", "School Project"],
       extraTech:        ["Storage Management", "Research", "Documentation"],
       link:             "../Documents/Rockstor_Installation_Documentation.pdf",
+      linkLabel:        "Download Documentation",
+      status:           "complete",
+      date:             "13/04/2026"
+    },
+    {
+      id:               "vpn-setup",
+      title:            "Windows Server 2022 VPN & DirectAccess Setup",
+      description:      "Implementation and configuration of VPN and DirectAccess services on Windows Server 2022.",
+      fullDescription:  "This project involved setting up and configuring VPN and DirectAccess services on a Windows Server 2022 environment. " +
+                        "The goal was to provide secure remote access to the organization's network. \n\n " +
+                        "This project was done with another student as part of a school group project. " +
+                        "We worked together to research, configure, and document the setup process. \n\n " +
+                        "The final grade was 6.3 out of 8.",
+      reflection:       "This project went in all great, only some mistakes in the setup of the network between the virtual machines. " +
+                         "Overall it was a great learning experience and I'm happy with the result.",
+      tech:             ["Windows Server 2022", "Server Configuration","School Project"],
+      extraTech:        ["VPN", "DirectAccess", "Group Project", "Research", "Documentation"],
+      link:             "../Documents/WindowsVPNProjectDocumentation.pdf",
       linkLabel:        "Download Documentation",
       status:           "complete"
     },
@@ -89,10 +90,15 @@ const PORTFOLIO = {
       id:               "steam-viewer",
       title:            "PowerApps & Power Automate — Steam Achievement Viewer",
       description:      "An application built with Power Apps & Power Automate to view Steam achievements for any game.",
-      fullDescription:  null,
-      reflection:       null,
-      tech:             ["Power Apps", "Power Automate", "API Integration"],
-      extraTech:        ["Steam API"],
+      fullDescription:  "This project involved building an application using Power Apps and Power Automate to view Steam achievements for any game. \n" +
+                        "Power Automate was used with the Steam API to retrieve data from the Steam platform. \n" +
+                        "The data was stored within Dataverse for easy access and management. \n" +
+                        "With the application you were able to view all your games in a list and progress of achievements, by clicking on a game you were able to view a list of achievements and their completion status. \n\n" +
+                        "The application isn't published due to limitations with the Power Apps environments and slowness of the Power Automate flow.",
+      reflection:       "This project was quite fun to work on with the Steam API, however it was frustrating trying to find a way to store the information in a way that was accessible with the resources provided. " +
+                        "Overall I'm quite happy with the outcome but would rather not have to deal with Power Apps again.",
+      tech:             ["Automation", "Power Platform", "API Integration", "School Project"],
+      extraTech:        ["Steam API", "Power Automate", "Dataverse", "Power Apps"],
       link:             "../Documents/SteamAchievementViewer.pdf",
       linkLabel:        "Download Presentation",
       status:           "complete"
@@ -101,9 +107,11 @@ const PORTFOLIO = {
       id:               "log-analyser",
       title:            "Python Log Analyser",
       description:      "A Python script to analyse Minecraft server logs — tracks user authentication, logins, and logouts.",
-      fullDescription:  null,
-      reflection:       null,
-      tech:             ["Python"],
+      fullDescription:  "This project involved creating a Python script to analyse Minecraft server logs. " +
+                        "The script tracks user authentication, logins, and logouts " +
+                        "The script was created as part of a school project to learn about Python and log analysis.",
+      reflection:       "This project was very small so won't go into too much detail and have no documentation, however it was a good way of learning how to get logs remotely using Python.",
+      tech:             ["Python", "School Project"],
       extraTech:        [],
       link:             null,
       linkLabel:        null,
@@ -115,7 +123,7 @@ const PORTFOLIO = {
       description:      "A planned web application that will allow users to host servers for a selection of games.",
       fullDescription:  null,
       reflection:       null,
-      tech:             ["Linux Server", "Docker", "Web Application"],
+      tech:             ["Linux Server", "Docker", "Web Application", "School Project"],
       extraTech:        [],
       link:             null,
       linkLabel:        null,
@@ -255,7 +263,7 @@ const PORTFOLIO = {
     {
       school:   "Lycée Guillaume Kroll",
       degree:   "BTS — Cloud Computing",
-      years:    "2025 – Present",
+      years:    "2025 - Present",
       location: "Luxembourg"
     },
     {
