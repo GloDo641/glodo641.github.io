@@ -101,7 +101,7 @@ function buildModal() {
   descWrap.appendChild(modalDesc);
   left.appendChild(descWrap);
 
-  modalReflectionWrap = el('div', '');
+  modalReflectionWrap = el('div', 'modal-reflection-block');
   modalReflectionWrap.appendChild(el('div', 'modal-section-label', 'Reflection'));
   modalReflection = el('p', 'modal-text');
   modalReflectionWrap.appendChild(modalReflection);
@@ -197,6 +197,18 @@ function renderRows(projects) {
     row.style.cursor = 'pointer';
     row.setAttribute('title', 'Click for more details');
     row.addEventListener('click', () => openModal(proj));
+
+    // ── IMAGE: thumbnail on the left (if provided) ──
+    if (proj.image) {
+      row.classList.add('has-img');
+      const imgWrap = el('div', 'proj-img-wrap');
+      const img = document.createElement('img');
+      img.src       = proj.image;
+      img.alt       = proj.title;
+      img.className = 'proj-img';
+      imgWrap.appendChild(img);
+      row.appendChild(imgWrap);
+    }
 
     // ── LEFT: title + description + date ──
     const left = el('div', 'proj-left');

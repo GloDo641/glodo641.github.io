@@ -75,6 +75,7 @@ const PORTFOLIO = {
   // date:            e.g. "January 2025" — shown under description in the row
   // fullDescription: longer text shown in the detail pop-up (falls back to description)
   // reflection:      personal reflection shown in pop-up (omit or null to hide)
+  // image:           path to a project image, e.g. "../images/project-rockstor.jpg" (null to hide)
   // tech:            MAIN tags — appear in the row AND in the search filter pills
   // extraTech:       EXTRA tags — appear only inside the detail pop-up
   projects: [
@@ -90,6 +91,7 @@ const PORTFOLIO = {
                         "The final grade is yet to be given.",
       reflection:       "This project was an amazing learning experience. I learned a lot about server hardware, RAID configurations, and accessing storages over the network. " +
                         "I'm happy with the result and the knowledge I gained from this project.",
+      image:            "../images/rockstor-logo.png",
       tech:             ["Server Hardware", "Server Configuration", "Linux", "School Project"],
       extraTech:        ["Storage Management", "Research", "Documentation"],
       link:             "../Documents/Rockstor_Installation_Documentation.pdf",
@@ -108,6 +110,7 @@ const PORTFOLIO = {
                         "The final grade was 6.3 out of 8.",
       reflection:       "This project went in all great, only some mistakes in the setup of the network between the virtual machines. " +
                          "Overall it was a great learning experience and I'm happy with the result.",
+      image:            "../images/windows_server.jpg",
       tech:             ["Windows Server 2022", "Server Configuration","School Project"],
       extraTech:        ["VPN", "DirectAccess", "Group Project", "Research", "Documentation"],
       link:             "../Documents/WindowsVPNProjectDocumentation.pdf",
@@ -125,6 +128,7 @@ const PORTFOLIO = {
                         "The application isn't published due to limitations with the Power Apps environments and slowness of the Power Automate flow.",
       reflection:       "This project was quite fun to work on with the Steam API, however it was frustrating trying to find a way to store the information in a way that was accessible with the resources provided. " +
                         "Overall I'm quite happy with the outcome but would rather not have to deal with Power Apps again.",
+      image:            null,
       tech:             ["Automation", "Power Platform", "API Integration", "School Project"],
       extraTech:        ["Steam API", "Power Automate", "Dataverse", "Power Apps"],
       link:             "../Documents/SteamAchievementViewer.pdf",
@@ -139,6 +143,7 @@ const PORTFOLIO = {
                         "The script tracks user authentication, logins, and logouts " +
                         "The script was created as part of a school project to learn about Python and log analysis.",
       reflection:       "This project was very small so won't go into too much detail and have no documentation, however it was a good way of learning how to get logs remotely using Python.",
+      image:            null,
       tech:             ["Python", "School Project"],
       extraTech:        [],
       link:             null,
@@ -151,6 +156,7 @@ const PORTFOLIO = {
       description:      "A planned web application that will allow users to host servers for a selection of games.",
       fullDescription:  null,
       reflection:       null,
+      image:            null,
       tech:             ["Linux Server", "Docker", "Web Application", "School Project"],
       extraTech:        [],
       link:             null,
@@ -239,8 +245,9 @@ const PORTFOLIO = {
         date:        "04/03/2026",
         learnings: [
           "Cloud infrastructure and AWS services",
-          "AI and machine learning services",
-          "Enterprise cloud solutions"
+          "AI for customer service and automation",
+          "IDE using AWS AI services for building applications",
+          "MCP Servers for AI integration"
         ]
       },
       {
