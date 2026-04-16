@@ -1552,6 +1552,50 @@ footer {
   padding-left: 0;
 }
 
+/* ── Course image toggles ─────────────────────────────── */
+.course-img-btns {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.course-img-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.course-img-btn:hover,
+.course-img-btn--active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.course-img-wrap {
+  margin-top: 0.85rem;
+}
+
+.course-img-wrap--hidden {
+  display: none;
+}
+
+.course-img {
+  max-width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
 /* ── Workshops page responsive ────────────────────────── */
 @media (max-width: 600px) {
   .wshop-card         { padding: 1.25rem 1.25rem; }
@@ -1585,7 +1629,16 @@ footer {
   gap: 1.75rem;
 }
 
-.lpath-semester-label {
+.lpath-semester-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font);
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1594,30 +1647,28 @@ footer {
   margin-bottom: 0.85rem;
 }
 
-.lpath-subjects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0.75rem;
-}
-
-.lpath-subject-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 1rem 1.25rem;
-}
-
-.lpath-subject-name {
-  font-size: 14px;
-  font-weight: 600;
+.lpath-semester-toggle:hover {
   color: var(--text-bright);
-  margin-bottom: 0.35rem;
 }
 
-.lpath-subject-desc {
-  font-size: 13px;
+.lpath-semester-icon {
+  font-size: 10px;
+  transition: color 0.2s;
+}
+
+.lpath-semester-body {
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+
+.lpath-semester-body--collapsed {
+  display: none;
+}
+
+.lpath-semester-highlights {
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.7;
 }
 
 /* ── Personal Reflection ──────────────────────────────── */

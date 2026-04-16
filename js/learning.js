@@ -85,28 +85,39 @@ function buildEduCard(edu) {
     card.appendChild(p);
   }
 
-  // Subjects & Modules — grouped by semester
+  // Semester highlights — collapsible
   if (edu.subjects && edu.subjects.length) {
     const wrap = el('div', 'lpath-subjects');
-    wrap.appendChild(el('div', 'lpath-block-label', 'Subjects & Modules'));
+    wrap.appendChild(el('div', 'lpath-block-label', 'Semester Highlights'));
 
     edu.subjects.forEach(sem => {
       const semWrap = el('div', 'lpath-semester');
-      semWrap.appendChild(el('div', 'lpath-semester-label', sem.semester));
 
-      const grid = el('div', 'lpath-subjects-grid');
-      sem.courses.forEach(course => {
-        const subjCard = el('div', 'lpath-subject-card');
-        subjCard.appendChild(el('div', 'lpath-subject-name', course.name));
-        if (course.description) {
-          const p = el('p', 'lpath-subject-desc');
-          p.innerHTML = course.description.replace(/\n/g, '<br>');
-          subjCard.appendChild(p);
-        }
-        grid.appendChild(subjCard);
+      const toggle = el('button', 'lpath-semester-toggle');
+      toggle.setAttribute('aria-expanded', 'true');
+      const labelSpan = el('span', '', sem.semester);
+      const icon = el('i', 'fa-solid fa-chevron-up lpath-semester-icon');
+      toggle.appendChild(labelSpan);
+      toggle.appendChild(icon);
+
+      const body = el('div', 'lpath-semester-body');
+      if (sem.highlights) {
+        const p = el('p', 'lpath-semester-highlights');
+        p.innerHTML = sem.highlights.replace(/\n/g, '<br>');
+        body.appendChild(p);
+      }
+
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        body.classList.toggle('lpath-semester-body--collapsed', expanded);
+        icon.className = expanded
+          ? 'fa-solid fa-chevron-down lpath-semester-icon'
+          : 'fa-solid fa-chevron-up lpath-semester-icon';
       });
 
-      semWrap.appendChild(grid);
+      semWrap.appendChild(toggle);
+      semWrap.appendChild(body);
       wrap.appendChild(semWrap);
     });
 
@@ -191,6 +202,37 @@ function buildPage() {
         const p = el('p', 'wshop-small-desc');
         p.innerHTML = course.description.replace(/\n/g, '<br>');
         item.appendChild(p);
+      }
+
+      // Image toggle buttons — only rendered when an image path exists
+      if (course.progressImage || course.examImage) {
+        const btnRow   = el('div', 'course-img-btns');
+        const imgWraps = [];
+
+        const makeToggle = (label, icon, imageSrc) => {
+          const btn = el('button', 'course-img-btn');
+          btn.innerHTML = `<i class="fa-solid ${icon}"></i> ${label}`;
+
+          const imgWrap = el('div', 'course-img-wrap course-img-wrap--hidden');
+          const img     = el('img', 'course-img');
+          img.src = imageSrc;
+          img.alt = label;
+          imgWrap.appendChild(img);
+
+          btn.addEventListener('click', () => {
+            const hidden = imgWrap.classList.toggle('course-img-wrap--hidden');
+            btn.classList.toggle('course-img-btn--active', !hidden);
+          });
+
+          btnRow.appendChild(btn);
+          imgWraps.push(imgWrap);
+        };
+
+        if (course.progressImage) makeToggle('Course Progress', 'fa-bars-progress', course.progressImage);
+        if (course.examImage)     makeToggle('Exam Results',    'fa-file-lines',    course.examImage);
+
+        item.appendChild(btnRow);
+        imgWraps.forEach(w => item.appendChild(w));
       }
 
       list.appendChild(item);

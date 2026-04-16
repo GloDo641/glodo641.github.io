@@ -310,42 +310,47 @@ const PORTFOLIO = {
         subjects: [
           {
             semester: "Semester 2",
-            courses: [
-              { name: "IT Automation 2", description: "Learned how to create and use Bash and Powershell scripts for automation." },
-              { name: "IT Security 2",   description: "Learned about cryptography and digital signatures." }
-            ]
+            highlights: "Focused on scripting and security — wrote Bash and PowerShell scripts for automation tasks, and dove into cryptography and digital signatures in IT Security."
           },
           {
             semester: "Semester 1",
-            courses: [
-              { name: "IT Automation 1", description: "Learned about automation flows along with Power Automate and Power Apps." },
-              { name: "IT Security 1",   description: "Learned about different attack vectors and how to protect against them. Covered topics like phishing, malware, and network security." },
-              { name: "IT Networking 1", description: "Covered network topologies, IP addressing, configuring switches and routers. Learned using Cisco Packet Tracer." },
-              { name: "Cloud Infrastructure 1", description: "Learned about computer hardware and held presentations about them." },
-              { name: "Operating Systems Linux", description: "Learned about Linux distributions and command line interface. Learned how to configure users, permissions, services, storage and networking of Linux systems." }
-            ]
+            highlights: "Built the foundations across five modules: automation flows with Power Automate and Power Apps, attack vectors and network security, network topology and Cisco Packet Tracer, computer hardware, and Linux administration covering users, permissions, services, and storage."
           }
-          // add more semesters: { semester: "Semester 2", courses: [...] }
+          // add more semesters: { semester: "Semester 3", highlights: "..." }
         ],
         reflection: "Test"   // your personal reflection on the programme overall
       }
     ],
     onlineCourses: [
       {
-        title:       "AZ-900: Microsoft Azure Fundamentals",
-        platform:    "Pluralsight",
-        description: null   // optional description of what you cover
+        title:         "AZ-900: Microsoft Azure Fundamentals",
+        platform:      "Pluralsight",
+        description:   "Courses covering Azure fundamentals, including cloud concepts, Azure services and architecture, identity and management, security, deployment, and governance.",
+        progressImage: "../images/AZ900-progress.png",   // path to course progress screenshot, e.g. "../images/az900-progress.png"
+        examImage:     "../images/AZ900-testexam.png"    // path to exam/test results screenshot, e.g. "../images/az900-exam.png"
       },
       {
-        title:       "AZ-040: Microsoft Azure Administration",
-        platform:    "Pluralsight",
-        description: null   // optional description of what you cover
+        title:         "AZ-040: Microsoft Azure Administration",
+        platform:      "Pluralsight",
+        description:   "Courses covering Azure administration, including virtual machines, storage, networking, and identity management. (In Progress)",
+        progressImage: null,
+        examImage:     null
       },
       {
-        title:       "The System Administrator's Guide to Bash Scripting",
-        platform:    "Pluralsight",
-        description: null   // optional description of what you cover
-      }
+        title:         "The System Administrator's Guide to Bash Scripting",
+        platform:      "Pluralsight",
+        description:   "Courses covering Bash scripting, including basic commands, file operations, and automation scripts. (In Progress)",
+        progressImage: "../images/BASH-progress.png",
+        examImage:     null
+      },
+      {
+        title:         "Cloud Computing Fundamentals",
+        platform:      "Pluralsight Skill IQ",
+        description:   "Test on my knowledge of cloud computing fundamentals. Score : Proficient Average",
+        progressImage: null,
+        examImage:     "../images/CCFundamentals-SkillIQ.png"
+      },
+      // add more courses: { title, platform, description, progressImage, examImage }
     ]
   }
 
