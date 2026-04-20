@@ -25,7 +25,7 @@ const PORTFOLIO = {
   // ── ABOUT ─────────────────────────────────────────────────
   // Add or remove paragraphs as needed.
   about: [
-    "I am Donovan Glodt, currently studying for a BTS in Cloud Computing at the LGK (Lycée Guillaume Kroll).",
+    "I am Donovan Glodt, currently studying for a BTS in Cloud Computing at Lycée Guillaume Kroll (LGK).",
     "This portfolio showcases all that I have learned on my path and what I have accomplished throughout my studies."
   ],
 
@@ -53,7 +53,7 @@ const PORTFOLIO = {
       role:        "Academic Internship",
       company:     "CTIE - Centre des technologies et informations d'État",
       years:       "03/2024 (1 week)",
-      description: "Analysis of the organisation's proceedures in the state administration"
+      description: "Analysis of the organisation's procedures in the state administration"
     }
   ],
 
@@ -109,7 +109,7 @@ const PORTFOLIO = {
                         "This project was done with another student as part of a school group project. " +
                         "We worked together to research, configure, and document the setup process. \n\n " +
                         "The final grade was 6.3 out of 8.",
-      reflection:       "This project went in all great, only some mistakes in the setup of the network between the virtual machines. " +
+      reflection:       "This project went really well, with only some mistakes in the setup of the network between the virtual machines. " +
                          "Overall it was a great learning experience and I'm happy with the result.",
       image:            "../images/windows_server.jpg",
       tech:             ["Windows Server 2022", "Server Configuration","School Project"],
@@ -141,9 +141,9 @@ const PORTFOLIO = {
       title:            "Python Log Analyser",
       description:      "A Python script to analyse Minecraft server logs — tracks user authentication, logins, and logouts.",
       fullDescription:  "This project involved creating a Python script to analyse Minecraft server logs. " +
-                        "The script tracks user authentication, logins, and logouts " +
+                        "The script tracks user authentication, logins, and logouts. " +
                         "The script was created as part of a school project to learn about Python and log analysis.",
-      reflection:       "This project was very small so won't go into too much detail and have no documentation, however it was a good way of learning how to get logs remotely using Python.",
+      reflection:       "This project was very small, so I won't go into too much detail and there is no documentation for it, however it was a good way of learning how to get logs remotely using Python.",
       image:            "../images/Python-logo.png",
       tech:             ["Python", "School Project"],
       extraTech:        [],
@@ -242,7 +242,7 @@ const PORTFOLIO = {
         ]
       },
       {
-        title:       "AWS re:Invent 2026 — Arhs Group",
+        title:       "AWS re:Invent re:Cap 2026 — Arhs Group",
         description: "Presentations on multiple cloud infrastructures, AI services, and enterprise solutions.",
         location:    "Arhs Group, Belval, Luxembourg",
         date:        "04/03/2026",
@@ -322,7 +322,7 @@ const PORTFOLIO = {
           }
           // add more semesters: { semester: "Semester 3", highlights: "..." }
         ],
-        reflection: "During my BTS Studies, I have learned a lot about many topics that have interested me. Having more focus on the technical side rather than the theoritical side has helped me understand these concepts better.\n" +
+        reflection: "During my BTS Studies, I have learned a lot about many topics that have interested me. Having more focus on the technical side rather than the theoretical side has helped me understand these concepts better.\n" +
           "During the time I have been able to use my strength in problem-solving and fast learning to understand the complex topics, we're learning about.\n" +
           "Working with the class and collaborating on projects has been a great experience to improve my weakness in communication and teamwork. Also they have helped me in learning how to plan myself and manage my time better.\n\n" +
           "All in all, I am very happy to have switched my studies to this field, I hope to further my knowledge and skills during the 2 last semesters." // your personal reflection on the programme overall
@@ -353,7 +353,7 @@ const PORTFOLIO = {
       {
         title:         "Cloud Computing Fundamentals",
         platform:      "Pluralsight Skill IQ",
-        description:   "Test on my knowledge of cloud computing fundamentals. Score : Proficient Average",
+        description:   "Test on my knowledge of cloud computing fundamentals. Score: Proficient Average",
         progressImage: null,
         examImage:     "../images/CCFundamentals-SkillIQ.png"
       },

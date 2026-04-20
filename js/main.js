@@ -110,6 +110,7 @@ function populateHero() {
   btnCV.className = 'btn-primary';
   btnCV.textContent = 'Download CV';
 
+  actions.appendChild(btnCV);
   text.appendChild(actions);
   content.appendChild(text);
 
