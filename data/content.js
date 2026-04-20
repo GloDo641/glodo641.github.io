@@ -128,7 +128,7 @@ const PORTFOLIO = {
                         "The application isn't published due to limitations with the Power Apps environments and slowness of the Power Automate flow.",
       reflection:       "This project was quite fun to work on with the Steam API, however it was frustrating trying to find a way to store the information in a way that was accessible with the resources provided. " +
                         "Overall I'm quite happy with the outcome but would rather not have to deal with Power Apps again.",
-      image:            null,
+      image:            "../images/Powerapps-logo.png",
       tech:             ["Automation", "Power Platform", "API Integration", "School Project"],
       extraTech:        ["Steam API", "Power Automate", "Dataverse", "Power Apps"],
       link:             "../Documents/SteamAchievementViewer.pdf",
@@ -143,7 +143,7 @@ const PORTFOLIO = {
                         "The script tracks user authentication, logins, and logouts " +
                         "The script was created as part of a school project to learn about Python and log analysis.",
       reflection:       "This project was very small so won't go into too much detail and have no documentation, however it was a good way of learning how to get logs remotely using Python.",
-      image:            null,
+      image:            "../images/Python-logo.png",
       tech:             ["Python", "School Project"],
       extraTech:        [],
       link:             null,
@@ -154,7 +154,9 @@ const PORTFOLIO = {
       id:               "game-server",
       title:            "Game Server Hosting Web Application",
       description:      "A planned web application that will allow users to host servers for a selection of games.",
-      fullDescription:  null,
+      fullDescription:  "This is a work in progress project that aims to create a web application that will allow users to host servers for a selection of games.\n\n" +
+                        "The application will allow users to select a game, configure server settings, and deploy a server with a single click.\n\n" +
+                        "The application is being built using Linux Server, Docker, and a Web Application.",
       reflection:       null,
       image:            null,
       tech:             ["Linux Server", "Docker", "Web Application", "School Project"],
@@ -309,16 +311,20 @@ const PORTFOLIO = {
         description: "The BTS Cloud Computing programme is about cloud infrastructure, virtualization, security, and management. We learn a lot about different services, tools and technologies used in the cloud to build infrastructure, deploy applications, and manage cloud environments.",
         subjects: [
           {
-            semester: "Semester 2",
-            highlights: "Focused on scripting and security — wrote Bash and PowerShell scripts for automation tasks, and dove into cryptography and digital signatures in IT Security."
+            semester: "Semester 1",
+            highlights: "Highlight of this semester was learning the fundamentals of the cloud and its tools, additionally learning how to use Windows Server and Linux systems.\n\n" +
+            "We learnt about Cisco networking, computer hardware, how to present yourself professionally, and how to work on projects."
           },
           {
-            semester: "Semester 1",
-            highlights: "Built the foundations across five modules: automation flows with Power Automate and Power Apps, attack vectors and network security, network topology and Cisco Packet Tracer, computer hardware, and Linux administration covering users, permissions, services, and storage."
+            semester: "Semester 2",
+            highlights: "Highlight of this semester was working on physical servers and working on projects related to virtualization. Also more in depth knowledge into Cloud systems and actually using these tools we learnt about."
           }
           // add more semesters: { semester: "Semester 3", highlights: "..." }
         ],
-        reflection: "Test"   // your personal reflection on the programme overall
+        reflection: "During my BTS Studies, I have learned a lot about many topics that have interested me. Having more focus on the technical side rather than the theoritical side has helped me understand these concepts better.\n" +
+          "During the time I have been able to use my strength in problem-solving and fast learning to understand the complex topics, we're learning about.\n" +
+          "Working with the class and collaborating on projects has been a great experience to improve my weakness in communication and teamwork. Also they have helped me in learning how to plan myself and manage my time better.\n\n" +
+          "All in all, I am very happy to have switched my studies to this field, I hope to further my knowledge and skills during the 2 last semesters." // your personal reflection on the programme overall
       }
     ],
     onlineCourses: [

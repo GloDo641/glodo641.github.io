@@ -13,7 +13,7 @@
   --accent:       #c41e1e;
   --accent-light: #e53535;
   --text:         #e0e0e0;
-  --text-muted:   #888888;
+  --text-muted:   #aaaaaa;
   --text-bright:  #f0f0f0;
   --font:         'Inter', system-ui, -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', 'Consolas', monospace;
@@ -446,6 +446,14 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.project-card-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
 }
 
 
@@ -1643,7 +1651,7 @@ footer {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--text);
   margin-bottom: 0.85rem;
 }
 
@@ -1680,7 +1688,7 @@ footer {
 
 .lpath-reflection-text {
   font-size: 15px;
-  color: var(--text-muted);
+  color: var(--text);
   line-height: 1.8;
   font-style: italic;
 }

@@ -94,13 +94,13 @@ function buildEduCard(edu) {
       const semWrap = el('div', 'lpath-semester');
 
       const toggle = el('button', 'lpath-semester-toggle');
-      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
       const labelSpan = el('span', '', sem.semester);
-      const icon = el('i', 'fa-solid fa-chevron-up lpath-semester-icon');
+      const icon = el('i', 'fa-solid fa-chevron-down lpath-semester-icon');
       toggle.appendChild(labelSpan);
       toggle.appendChild(icon);
 
-      const body = el('div', 'lpath-semester-body');
+      const body = el('div', 'lpath-semester-body lpath-semester-body--collapsed');
       if (sem.highlights) {
         const p = el('p', 'lpath-semester-highlights');
         p.innerHTML = sem.highlights.replace(/\n/g, '<br>');

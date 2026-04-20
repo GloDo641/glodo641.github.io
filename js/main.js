@@ -309,12 +309,21 @@ function populateProjects() {
   if (!section) return;
 
   const container = el('div', 'container');
-  container.appendChild(sectionHeading('What I built', 'Projects'));
+  container.appendChild(sectionHeading('What I built', 'Highlighted Projects'));
 
   const grid = el('div', 'projects-grid fade-up');
 
-  PORTFOLIO.projects.forEach(proj => {
+  PORTFOLIO.projects.slice(0, 2).forEach(proj => {
     const card = el('div', 'project-card');
+
+    // Project image
+    if (proj.image) {
+      const img = document.createElement('img');
+      img.src       = proj.image;
+      img.alt       = proj.title;
+      img.className = 'project-card-img';
+      card.appendChild(img);
+    }
 
     // Header: title + status
     const header = el('div', 'project-card-header');
@@ -448,7 +457,7 @@ function populateWorkshops() {
   // Left: Visits
   const visitsCol = el('div', 'split-col');
   visitsCol.appendChild(el('div', 'split-col-title', 'Visits'));
-  visits.forEach(v => {
+  visits.slice(0, 1).forEach(v => {
     const card = el('div', 'list-card');
     const body = el('div', 'list-body');
     body.appendChild(el('div', 'list-title', v.title));
@@ -461,7 +470,7 @@ function populateWorkshops() {
   // Right: Speakers
   const speakersCol = el('div', 'split-col');
   speakersCol.appendChild(el('div', 'split-col-title', 'Speakers'));
-  speakers.forEach(s => {
+  speakers.slice(0, 1).forEach(s => {
     const card = el('div', 'list-card');
     const body = el('div', 'list-body');
     body.appendChild(el('div', 'list-title', s.name));
@@ -513,7 +522,7 @@ function populateLearning() {
   // Right: Online Courses
   const courseCol = el('div', 'split-col');
   courseCol.appendChild(el('div', 'split-col-title', 'Online Courses'));
-  onlineCourses.forEach(course => {
+  onlineCourses.slice(0, 1).forEach(course => {
     const card = el('div', 'list-card');
     const body = el('div', 'list-body');
     body.appendChild(el('div', 'list-title', course.title));
@@ -525,6 +534,15 @@ function populateLearning() {
   cols.appendChild(courseCol);
 
   container.appendChild(cols);
+
+  const cta = el('div', 'section-cta fade-up');
+  const link = document.createElement('a');
+  link.href      = 'learning.html';
+  link.className = 'btn-secondary';
+  link.textContent = 'View All Courses →';
+  cta.appendChild(link);
+  container.appendChild(cta);
+
   section.appendChild(container);
 }
 
