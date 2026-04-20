@@ -60,13 +60,14 @@ const PORTFOLIO = {
   // ── SKILLS ────────────────────────────────────────────────
   // Each entry is a directory-like category with a list of skills.
   skills: [
-    { category: "cloud/",       items: ["Microsoft Azure", "Docker", "Power Apps", "Power Automate"] },
+    { category: "cloud/",       items: ["Microsoft Azure", "Docker"] },
     { category: "systems/",     items: ["Linux", "Windows Server", "VirtualBox", "Computer Hardware"] },
     { category: "networking/",  items: ["Cisco", "IT Infrastructure", "Database Design"] },
     { category: "programming/", items: ["Java", "Python"] },
     { category: "scripting/",   items: ["Bash", "PowerShell"] },
     { category: "office/",      items: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint"] },
-    { category: "management/",  items: ["SCRUM", "Resource Planning", "Documentation"] }
+    { category: "management/",  items: ["SCRUM", "Resource Planning", "Documentation"] },
+    { category: "other/",       items: ["Power Apps", "Power Automate"] }
   ],
 
   // ── PROJECTS ──────────────────────────────────────────────
@@ -282,15 +283,15 @@ const PORTFOLIO = {
     ],
 
     smallerSpeakers: [
-      { name: "Alain Hitzig", topic: "Quantum Computing",  
+      { name: "Alain Hitzig",    topic: "Quantum Computing",    date: "03/03/2026",
         description: "Introduction to quantum computing principles, applications, and future implications for cloud infrastructure and risks in cybersecurity." },
-      { name: "Christian Stemmler", topic: "Cloud Sustainability",  
+      { name: "Christian Stemmler", topic: "Cloud Sustainability", date: "06/01/2026",
         description: "Lecture on the environmental impact of cloud computing and how the industry is working towards more sustainable infrastructure." },
-      { name: "Yves Schlüter",      topic: "Interview Simulations", 
+      { name: "Yves Schlüter",   topic: "Interview Simulations", date: "04/12/2025",
         description: "Practical session simulating real job interviews, with feedback on communication, technical answers, professional presentation, and CVs and cover letters." },
-      { name: "Restena",            topic: "Phishing Defense",      
+      { name: "Restena",         topic: "Phishing Defense",      date: "16/12/2025",
         description: "Presentation on phishing attack techniques and how to identify and prevent them." },
-      { name: "Fabio Wiethoff",      topic: "Picture yourself", 
+      { name: "Fabio Wiethoff",  topic: "Picture yourself",      date: "08/10/2025",
         description: "Lecture on how to present yourself confidently in stance and posture for interviews and presentations. Made our photos for the portfolio." },
     ]
   },

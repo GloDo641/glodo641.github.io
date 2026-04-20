@@ -278,6 +278,7 @@ function populateSkills() {
     'scripting/':   { label: 'Scripting',   icon: 'fa-solid fa-terminal'       },
     'office/':      { label: 'Office',      icon: 'fa-solid fa-briefcase'      },
     'management/':  { label: 'Management',  icon: 'fa-solid fa-list-check'     },
+    'other/':       { label: 'Other',       icon: 'fa-solid fa-circle'         }
   };
 
   PORTFOLIO.skills.forEach(skill => {
