@@ -449,7 +449,7 @@ function populateWorkshops() {
   if (!section) return;
 
   const container = el('div', 'container');
-  container.appendChild(sectionHeading('Hands-on Experience', 'Workshops'));
+  container.appendChild(sectionHeading('Hands-on Experience', 'Highlighted Workshops'));
 
   const { visits, speakers } = PORTFOLIO.workshops;
   const cols = el('div', 'split-columns fade-up');
@@ -521,7 +521,7 @@ function populateLearning() {
 
   // Right: Online Courses
   const courseCol = el('div', 'split-col');
-  courseCol.appendChild(el('div', 'split-col-title', 'Online Courses'));
+  courseCol.appendChild(el('div', 'split-col-title', 'Highlighted Online Courses'));
   onlineCourses.slice(0, 1).forEach(course => {
     const card = el('div', 'list-card');
     const body = el('div', 'list-body');
