@@ -126,7 +126,7 @@ const PORTFOLIO = {
                         "Power Automate was used with the Steam API to retrieve data from the Steam platform. \n" +
                         "The data was stored within Dataverse for easy access and management. \n" +
                         "With the application you were able to view all your games in a list and progress of achievements, by clicking on a game you were able to view a list of achievements and their completion status. \n\n" +
-                        "The application isn't published due to limitations with the Power Apps environments and slowness of the Power Automate flow.",
+              "The application isn't published due to limitations with the Power Apps environme          nts and slowness of the Power Automate flow.",
       reflection:       "This project was quite fun to work on with the Steam API, however it was frustrating trying to find a way to store the information in a way that was accessible with the resources provided. " +
                         "Overall I'm quite happy with the outcome but would rather not have to deal with Power Apps again.",
       image:            "../images/Powerapps-logo.png",
@@ -313,18 +313,20 @@ const PORTFOLIO = {
         subjects: [
           {
             semester: "Semester 1",
-            highlights: "Highlight of this semester was learning the fundamentals of the cloud and its tools, additionally learning how to use Windows Server and Linux systems.\n\n" +
-            "We learnt about Cisco networking, computer hardware, how to present yourself professionally, and how to work on projects."
+            highlights: "Highlight of this semester was learning the fundamentals of the cloud and its tools, additionally learning how to use Windows Server and Linux systems.\n" +
+            "We learnt about Cisco networking, computer hardware, how to present yourself professionally, and how to work on projects.\n" + 
+            "Also we had some presentations and workshops to improve our soft skills for interviews in English."
           },
           {
             semester: "Semester 2",
-            highlights: "Highlight of this semester was working on physical servers and working on projects related to virtualization. Also more in depth knowledge into Cloud systems and actually using these tools we learnt about."
+            highlights: "Highlight of this semester was working on physical servers and working on projects related to virtualization. Also more in depth knowledge into Cloud systems and actually using these tools we learnt about.\n" +
+            "We're learning to be more hands-on and work with real hardware and software."
           }
           // add more semesters: { semester: "Semester 3", highlights: "..." }
         ],
         reflection: "During my BTS Studies, I have learned a lot about many topics that have interested me. Having more focus on the technical side rather than the theoretical side has helped me understand these concepts better.\n" +
           "During the time I have been able to use my strength in problem-solving and fast learning to understand the complex topics, we're learning about.\n" +
-          "Working with the class and collaborating on projects has been a great experience to improve my weakness in communication and teamwork. Also they have helped me in learning how to plan myself and manage my time better.\n\n" +
+          "Working with the class and collaborating on projects has been a great experience to improve my weakness in communication. Also the projects have helped me in learning how to plan myself and manage my time better.\n\n" +
           "All in all, I am very happy to have switched my studies to this field, I hope to further my knowledge and skills during the 2 last semesters." // your personal reflection on the programme overall
       }
     ],

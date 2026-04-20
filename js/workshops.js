@@ -181,12 +181,11 @@ function buildPage() {
       smallerSpeakers.forEach(sp => {
         const item = el('div', 'wshop-small-item');
 
-        if (sp.date) item.appendChild(el('span', 'wshop-small-date', sp.date));
-
         const row = el('div', 'wshop-small-row');
         row.appendChild(el('span', 'wshop-small-name',  sp.name));
         row.appendChild(el('span', 'wshop-small-dash',  '—'));
         row.appendChild(el('span', 'wshop-small-topic', sp.topic));
+        if (sp.date) row.appendChild(el('span', 'wshop-small-date', sp.date));
         item.appendChild(row);
 
         if (sp.description) {

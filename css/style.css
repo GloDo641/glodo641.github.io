@@ -1528,6 +1528,8 @@ footer {
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .wshop-small-item:last-child {
