@@ -70,7 +70,7 @@ function populateNav() {
 /* ── HERO ────────────────────────────────────────────────── */
 
 function populateHero() {
-  const { name, role, school, cv } = PORTFOLIO.identity;
+  const { name, role, school, cv, cvFrench } = PORTFOLIO.identity;
   const container = document.querySelector('#home .container');
   if (!container) return;
 
@@ -108,9 +108,16 @@ function populateHero() {
   btnCV.href = cv;
   btnCV.target = '_blank';
   btnCV.className = 'btn-primary';
-  btnCV.textContent = 'Download CV';
+  btnCV.textContent = 'Download CV (EN)';
+
+  const btnCVFr = document.createElement('a');
+  btnCVFr.href = cvFrench;
+  btnCVFr.target = '_blank';
+  btnCVFr.className = 'btn-secondary';
+  btnCVFr.textContent = 'Download CV (FR)';
 
   actions.appendChild(btnCV);
+  actions.appendChild(btnCVFr);
   text.appendChild(actions);
   content.appendChild(text);
 
@@ -141,7 +148,7 @@ function populateHero() {
 function populateAbout() {
   const section = document.getElementById('about');
   if (!section) return;
-  const { cv } = PORTFOLIO.identity;
+  const { cv, cvFrench } = PORTFOLIO.identity;
 
   const container = el('div', 'container');
   container.appendChild(sectionHeading('Introduction', 'About Me'));
@@ -156,7 +163,13 @@ function populateAbout() {
   btnCV.href = cv;
   btnCV.target = '_blank';
   btnCV.className = 'btn-primary';
-  btnCV.textContent = 'View Full CV';
+  btnCV.textContent = 'View CV (EN)';
+
+  const btnCVFr = document.createElement('a');
+  btnCVFr.href = cvFrench;
+  btnCVFr.target = '_blank';
+  btnCVFr.className = 'btn-primary';
+  btnCVFr.textContent = 'View CV (FR)';
 
   const btnSummary = document.createElement('button');
   btnSummary.className = 'btn-secondary';
@@ -164,6 +177,7 @@ function populateAbout() {
   btnSummary.addEventListener('click', openCVModal);
 
   cta.appendChild(btnCV);
+  cta.appendChild(btnCVFr);
   cta.appendChild(btnSummary);
   body.appendChild(cta);
   container.appendChild(body);

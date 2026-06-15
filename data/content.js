@@ -19,7 +19,8 @@ const PORTFOLIO = {
     githubDisplay:  "github.com/glodo641",
     linkedin:       "https://linkedin.com/in/donovan-glodt-251281389",
     linkedinDisplay:"donovan-glodt",
-    cv:             "../Documents/CV.pdf"
+    cv:             "../Documents/CV.pdf",
+    cvFrench:       "../Documents/CV_French.pdf"
   },
 
   // ── ABOUT ─────────────────────────────────────────────────
