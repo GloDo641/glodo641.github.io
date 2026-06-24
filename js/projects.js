@@ -66,7 +66,7 @@ const STATUS_MAP = {
 
 let modalBackdrop, modalTitle, modalStatus,
     modalDesc, modalReflectionWrap, modalReflection,
-    modalTags, modalDownload;
+    modalTags, modalDownload, modalDownload2;
 
 function buildModal() {
   modalBackdrop = el('div', 'modal-backdrop');
@@ -118,11 +118,21 @@ function buildModal() {
   tagsWrap.appendChild(modalTags);
   right.appendChild(tagsWrap);
 
-  modalDownload = document.createElement('a');
-  modalDownload.className = 'project-link modal-download-btn';
-  modalDownload.target    = '_blank';
-  right.appendChild(modalDownload);
+  // Download buttons stacked together at the bottom of the column
+  const downloads = el('div', 'modal-downloads');
 
+  modalDownload = document.createElement('a');
+  modalDownload.className = 'project-link';
+  modalDownload.target    = '_blank';
+  downloads.appendChild(modalDownload);
+
+  // Secondary download — only shown inside the modal (e.g. a presentation)
+  modalDownload2 = document.createElement('a');
+  modalDownload2.className = 'project-link';
+  modalDownload2.target    = '_blank';
+  downloads.appendChild(modalDownload2);
+
+  right.appendChild(downloads);
   body.appendChild(right);
   box.appendChild(body);
   modalBackdrop.appendChild(box);
@@ -171,6 +181,15 @@ function openModal(proj) {
     modalDownload.style.display = 'none';
   }
 
+  // Secondary download button (modal only) — e.g. "Download Presentation"
+  if (proj.secondaryLink) {
+    modalDownload2.href        = proj.secondaryLink;
+    modalDownload2.innerHTML   = `<span>&#8595;</span> ${proj.secondaryLinkLabel || 'Download'}`;
+    modalDownload2.style.display = '';
+  } else {
+    modalDownload2.style.display = 'none';
+  }
+
   modalBackdrop.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -184,6 +203,11 @@ function closeModal() {
 
 let projectList;
 
+// Featured projects are sorted to the top (stable sort keeps original order otherwise)
+function sortFeatured(projects) {
+  return [...projects].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+}
+
 function renderRows(projects) {
   projectList.innerHTML = '';
 
@@ -192,8 +216,9 @@ function renderRows(projects) {
     return;
   }
 
-  projects.forEach(proj => {
+  sortFeatured(projects).forEach(proj => {
     const row = el('div', 'project-row');
+    if (proj.featured) row.classList.add('featured');
     row.style.cursor = 'pointer';
     row.setAttribute('title', 'Click for more details');
     row.addEventListener('click', () => openModal(proj));
@@ -212,6 +237,11 @@ function renderRows(projects) {
 
     // ── LEFT: title + description + date ──
     const left = el('div', 'proj-left');
+    if (proj.featured) {
+      const badge = el('span', 'proj-featured-badge');
+      badge.innerHTML = '<i class="fa-solid fa-star"></i> Featured';
+      left.appendChild(badge);
+    }
     left.appendChild(el('div', 'proj-title', proj.title));
     left.appendChild(el('p', 'proj-desc', proj.description));
     if (proj.date) left.appendChild(el('p', 'proj-date', proj.date));

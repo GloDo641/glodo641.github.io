@@ -12,6 +12,8 @@
   --primary:      #861313;
   --accent:       #c41e1e;
   --accent-light: #e53535;
+  --featured:     #e07a1e;
+  --featured-light: #f5942f;
   --text:         #e0e0e0;
   --text-muted:   #aaaaaa;
   --text-bright:  #f0f0f0;
@@ -883,6 +885,68 @@ footer {
   justify-content: flex-end;
 }
 
+/* ── Explore (home page redirection cards) ───────────────── */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.explore-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  color: inherit;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+
+.explore-card:hover {
+  border-color: rgba(196, 30, 30, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  color: inherit;
+}
+
+.explore-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(196, 30, 30, 0.1);
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.explore-card-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.explore-card-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.explore-card-link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color var(--transition);
+}
+
+.explore-card:hover .explore-card-link { color: var(--accent-light); }
+.explore-card:hover .explore-card-link span { padding-left: 0.25rem; transition: padding-left var(--transition); }
+
 /* ═══════════════════════════════════════════════════════════
    PROJECTS PAGE
 ═══════════════════════════════════════════════════════════ */
@@ -1072,6 +1136,30 @@ footer {
   transform: translateY(-1px);
 }
 
+/* Featured projects — sorted first and tinted orange to stand out */
+.project-row.featured {
+  border-color: rgba(224, 122, 30, 0.45);
+  border-left: 3px solid var(--featured);
+  background: linear-gradient(180deg, rgba(224, 122, 30, 0.06), rgba(224, 122, 30, 0.02));
+}
+
+.project-row.featured:hover {
+  border-color: var(--featured);
+  box-shadow: 0 8px 32px rgba(224, 122, 30, 0.12);
+}
+
+.proj-featured-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--featured-light);
+  margin-bottom: 0.5rem;
+}
+
 .proj-title {
   font-size: 17px;
   font-weight: 700;
@@ -1086,11 +1174,13 @@ footer {
   line-height: 1.6;
 }
 
+/* Matches .wshop-small-date — keep date/meta typography consistent site-wide */
 .proj-date {
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
   margin-top: 0.4rem;
-  opacity: 0.65;
 }
 
 .proj-mid {
@@ -1235,8 +1325,12 @@ footer {
   gap: 0.45rem;
 }
 
-.modal-download-btn {
-  align-self: flex-start;
+/* Stacked download buttons in the modal (main + optional secondary) */
+.modal-downloads {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
   margin-top: auto;
 }
 
@@ -1443,7 +1537,9 @@ footer {
 }
 
 .wshop-card-meta {
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
   text-align: right;
   flex-shrink: 0;

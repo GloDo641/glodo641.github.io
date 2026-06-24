@@ -8,10 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   populateHero();
   populateAbout();
   populateSkills();
-  populateProjects();
   populateCertifications();
-  populateWorkshops();
-  populateLearning();
+  populateExplore();
   populateContact();
   populateFooter();
 
@@ -91,8 +89,8 @@ function populateHero() {
   const sections = [
     { href: '#about',          label: 'About' },
     { href: '#skills',         label: 'Skills' },
-    { href: '#projects',       label: 'Projects' },
     { href: '#certifications', label: 'Certifications' },
+    { href: '#explore',        label: 'Explore' },
     { href: '#contact',        label: 'Contact' },
   ];
   sections.forEach(({ href, label }) => {
@@ -286,8 +284,9 @@ function populateSkills() {
   const groups = el('div', 'skills-groups fade-up');
 
   const categoryMeta = {
-    'cloud/':       { label: 'Cloud',       icon: 'fa-solid fa-cloud'          },
-    'systems/':     { label: 'Systems',     icon: 'fa-solid fa-server'         },
+    'cloud/':          { label: 'Cloud',          icon: 'fa-solid fa-cloud'        },
+    'virtualization/': { label: 'Virtualization', icon: 'fa-solid fa-layer-group'  },
+    'systems/':        { label: 'Systems',        icon: 'fa-solid fa-server'       },
     'networking/':  { label: 'Networking',  icon: 'fa-solid fa-network-wired'  },
     'programming/': { label: 'Programming', icon: 'fa-solid fa-code'           },
     'scripting/':   { label: 'Scripting',   icon: 'fa-solid fa-terminal'       },
@@ -318,68 +317,36 @@ function populateSkills() {
   section.appendChild(container);
 }
 
-/* ── PROJECTS ────────────────────────────────────────────── */
+/* ── EXPLORE (redirection cards) ──────────────────────────── */
 
-function populateProjects() {
-  const section = document.getElementById('projects');
+function populateExplore() {
+  const section = document.getElementById('explore');
   if (!section) return;
 
   const container = el('div', 'container');
-  container.appendChild(sectionHeading('What I built', 'Highlighted Projects'));
+  container.appendChild(sectionHeading('Dive deeper', 'Explore More'));
 
-  const grid = el('div', 'projects-grid fade-up');
+  const grid = el('div', 'explore-grid fade-up');
 
-  PORTFOLIO.projects.slice(0, 2).forEach(proj => {
-    const card = el('div', 'project-card');
+  PORTFOLIO.explore.forEach(item => {
+    const card = el('a', 'explore-card');
+    card.href = item.href;
 
-    // Project image
-    if (proj.image) {
-      const img = document.createElement('img');
-      img.src       = proj.image;
-      img.alt       = proj.title;
-      img.className = 'project-card-img';
-      card.appendChild(img);
-    }
+    const iconBox = el('div', 'explore-card-icon');
+    iconBox.appendChild(el('i', item.icon));
+    card.appendChild(iconBox);
 
-    // Header: title + status
-    const header = el('div', 'project-card-header');
-    header.appendChild(el('div', 'project-title', proj.title));
-    const statusCls   = proj.status === 'complete' ? 'status-complete' : 'status-wip';
-    const statusLabel = proj.status === 'complete' ? 'Complete' : 'In Progress';
-    header.appendChild(el('span', `project-status ${statusCls}`, statusLabel));
-    card.appendChild(header);
+    card.appendChild(el('div', 'explore-card-title', item.title));
+    card.appendChild(el('p', 'explore-card-desc', item.description));
 
-    card.appendChild(el('p', 'project-desc', proj.description));
-
-    // Tech tags
-    const tech = el('div', 'project-tech');
-    proj.tech.forEach(t => tech.appendChild(el('span', 'tech-tag', t)));
-    card.appendChild(tech);
-
-    // Download link
-    if (proj.link) {
-      const a = document.createElement('a');
-      a.href = proj.link;
-      a.target = '_blank';
-      a.className = 'project-link';
-      a.innerHTML = `<span>↓</span> ${proj.linkLabel}`;
-      card.appendChild(a);
-    }
+    const cta = el('span', 'explore-card-link');
+    cta.innerHTML = `${item.linkLabel} <span aria-hidden="true">→</span>`;
+    card.appendChild(cta);
 
     grid.appendChild(card);
   });
 
   container.appendChild(grid);
-
-  // Link to the full projects page
-  const viewAllWrap = el('div', 'section-cta fade-up');
-  const viewAll = document.createElement('a');
-  viewAll.href = 'projects.html';
-  viewAll.className = 'btn-secondary';
-  viewAll.textContent = 'View All Projects →';
-  viewAllWrap.appendChild(viewAll);
-  container.appendChild(viewAllWrap);
-
   section.appendChild(container);
 }
 
@@ -454,110 +421,6 @@ function populateCertifications() {
 
     container.appendChild(btn);
   }
-
-  section.appendChild(container);
-}
-
-/* ── WORKSHOPS ───────────────────────────────────────────── */
-
-function populateWorkshops() {
-  const section = document.getElementById('workshops');
-  if (!section) return;
-
-  const container = el('div', 'container');
-  container.appendChild(sectionHeading('Hands-on Experience', 'Highlighted Workshops'));
-
-  const { visits, speakers } = PORTFOLIO.workshops;
-  const cols = el('div', 'split-columns fade-up');
-
-  // Left: Visits
-  const visitsCol = el('div', 'split-col');
-  visitsCol.appendChild(el('div', 'split-col-title', 'Visits'));
-  visits.slice(0, 1).forEach(v => {
-    const card = el('div', 'list-card');
-    const body = el('div', 'list-body');
-    body.appendChild(el('div', 'list-title', v.title));
-    body.appendChild(el('div', 'list-desc', v.description));
-    card.appendChild(body);
-    visitsCol.appendChild(card);
-  });
-  cols.appendChild(visitsCol);
-
-  // Right: Speakers
-  const speakersCol = el('div', 'split-col');
-  speakersCol.appendChild(el('div', 'split-col-title', 'Speakers'));
-  speakers.slice(0, 1).forEach(s => {
-    const card = el('div', 'list-card');
-    const body = el('div', 'list-body');
-    body.appendChild(el('div', 'list-title', s.name));
-    body.appendChild(el('div', 'list-desc', s.description));
-    card.appendChild(body);
-    speakersCol.appendChild(card);
-  });
-  cols.appendChild(speakersCol);
-
-  container.appendChild(cols);
-
-  const cta = el('div', 'section-cta fade-up');
-  const link = document.createElement('a');
-  link.href      = 'workshops.html';
-  link.className = 'btn-secondary';
-  link.textContent = 'View All Workshops →';
-  cta.appendChild(link);
-  container.appendChild(cta);
-
-  section.appendChild(container);
-}
-
-/* ── LEARNING PATH ───────────────────────────────────────── */
-
-function populateLearning() {
-  const section = document.getElementById('learning');
-  if (!section) return;
-
-  const container = el('div', 'container');
-  container.appendChild(sectionHeading('Studies', 'Learning Path'));
-
-  const { education, onlineCourses } = PORTFOLIO.learningPath;
-  const cols = el('div', 'split-columns fade-up');
-
-  // Left: Education
-  const eduCol = el('div', 'split-col');
-  eduCol.appendChild(el('div', 'split-col-title', 'Education'));
-  education.forEach(edu => {
-    const card = el('div', 'edu-card');
-    card.appendChild(el('div', 'edu-years', edu.years));
-    card.appendChild(el('div', 'edu-school', edu.school));
-    card.appendChild(el('div', 'edu-degree', edu.degree));
-    card.appendChild(el('div', 'edu-location', edu.location));
-    if (edu.description) card.appendChild(el('p', 'edu-desc', edu.description));
-    eduCol.appendChild(card);
-  });
-  cols.appendChild(eduCol);
-
-  // Right: Online Courses
-  const courseCol = el('div', 'split-col');
-  courseCol.appendChild(el('div', 'split-col-title', 'Highlighted Online Courses'));
-  onlineCourses.slice(0, 1).forEach(course => {
-    const card = el('div', 'list-card');
-    const body = el('div', 'list-body');
-    body.appendChild(el('div', 'list-title', course.title));
-    if (course.platform)    body.appendChild(el('div', 'list-desc', course.platform));
-    if (course.description) body.appendChild(el('p',   'list-desc', course.description));
-    card.appendChild(body);
-    courseCol.appendChild(card);
-  });
-  cols.appendChild(courseCol);
-
-  container.appendChild(cols);
-
-  const cta = el('div', 'section-cta fade-up');
-  const link = document.createElement('a');
-  link.href      = 'learning.html';
-  link.className = 'btn-secondary';
-  link.textContent = 'View All Courses →';
-  cta.appendChild(link);
-  container.appendChild(cta);
 
   section.appendChild(container);
 }

@@ -196,6 +196,7 @@ function buildPage() {
       row.appendChild(el('span', 'wshop-small-name',  course.title));
       row.appendChild(el('span', 'wshop-small-dash',  '—'));
       row.appendChild(el('span', 'wshop-small-topic', course.platform));
+      if (course.date) row.appendChild(el('span', 'wshop-small-date', course.date));
       item.appendChild(row);
 
       if (course.description) {

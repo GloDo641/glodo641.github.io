@@ -61,19 +61,54 @@ const PORTFOLIO = {
   // ── SKILLS ────────────────────────────────────────────────
   // Each entry is a directory-like category with a list of skills.
   skills: [
-    { category: "cloud/",       items: ["Microsoft Azure", "Docker"] },
-    { category: "systems/",     items: ["Linux", "Windows Server", "VirtualBox", "Computer Hardware"] },
-    { category: "networking/",  items: ["Cisco", "IT Infrastructure", "Database Design"] },
-    { category: "programming/", items: ["Java", "Python"] },
-    { category: "scripting/",   items: ["Bash", "PowerShell"] },
-    { category: "office/",      items: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint"] },
-    { category: "management/",  items: ["SCRUM", "Resource Planning", "Documentation"] },
-    { category: "other/",       items: ["Power Apps", "Power Automate"] }
+    { category: "cloud/",          items: ["Microsoft Azure", "AWS", "Docker"] },
+    { category: "virtualization/", items: ["Proxmox", "VMware", "VirtualBox"] },
+    { category: "systems/",        items: ["Linux", "Windows Server", "NAS / Storage", "RAID", "Computer & Server Hardware"] },
+    { category: "networking/",     items: ["Cisco", "IT Infrastructure", "VPN", "DHCP", "Database Design"] },
+    { category: "programming/",    items: ["Java", "Python"] },
+    { category: "scripting/",      items: ["Bash", "PowerShell"] },
+    { category: "office/",         items: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint"] },
+    { category: "management/",     items: ["SCRUM", "Resource Planning", "Documentation"] },
+    { category: "other/",          items: ["Power Apps", "Power Automate"] }
+  ],
+
+  // ── EXPLORE ───────────────────────────────────────────────
+  // Redirection cards on the home page — one per dedicated page.
+  // icon:        Font Awesome 6 class, e.g. "fa-solid fa-folder-open"
+  // href:        target page (relative to pages/)
+  // linkLabel:   text shown on the card's button
+  explore: [
+    {
+      title:       "Projects",
+      icon:        "fa-solid fa-folder-open",
+      description: "Browse all of my projects in detail, with documentation, technologies used, and personal reflections.",
+      href:        "projects.html",
+      linkLabel:   "View my projects"
+    },
+    {
+      title:       "Workshops",
+      icon:        "fa-solid fa-chalkboard-user",
+      description: "Discover the site visits, guest speakers, and hands-on sessions I have taken part in throughout my studies.",
+      href:        "workshops.html",
+      linkLabel:   "View my workshops"
+    },
+    {
+      title:       "Learning Path",
+      icon:        "fa-solid fa-graduation-cap",
+      description: "Follow my formal education and the online courses I have completed to grow my skills.",
+      href:        "learning.html",
+      linkLabel:   "View my learning path"
+    }
   ],
 
   // ── PROJECTS ──────────────────────────────────────────────
   // status:          "complete" | "wip" | "cancelled"
+  // featured:        true = sorted to the top of the projects list and highlighted in orange
   // link:            null if no downloadable document
+  // linkLabel:       text for the main download button (shown in the row AND the pop-up)
+  // secondaryLink:      OPTIONAL second PDF — its button only appears inside the pop-up,
+  //                     under the main one (e.g. a presentation). Omit/null to hide.
+  // secondaryLinkLabel: text for that second button, e.g. "Download Presentation"
   // date:            e.g. "January 2025" — shown under description in the row
   // fullDescription: longer text shown in the detail pop-up (falls back to description)
   // reflection:      personal reflection shown in pop-up (omit or null to hide)
@@ -81,6 +116,50 @@ const PORTFOLIO = {
   // tech:            MAIN tags — appear in the row AND in the search filter pills
   // extraTech:       EXTRA tags — appear only inside the detail pop-up
   projects: [
+    {
+      id:               "minicfl-azure-project",
+      title:            "Azure deployment and resource management - MiniCFL",
+      description:      "A project where we utilise what we learnt during our AZ-104 training and create a real application within Azure.",
+      fullDescription:  "This project involved using Azure resources to create a web application with access to a database \n" +
+                        "It's primary purpose was to demonstrate our skills in Azure and how we've grown in its usage. \n" +
+                        "My teams project was a small simulation of a train going from one station to another and display its arrival times and possible delays. \n" +
+                        "For this we used a VM running a database with an App service created out of a Azure Contair Registry image to make the database. The updates for the train were done using Azure functions. \n" +
+                        "Alongside, we created policies, groups, RBAC assignments, budgets and used monitoring resources to demonstrate further our knowledge of Azure. \n\n" +
+                        "The GitHub is private which container the image for the ACR, so I can't show it here. \n" +
+                        "The final grade is yet to be given.",
+      reflection:       "This project, despite needing to be done within a short time, went really well, some issues arose where we needed to solve ourselves using what we learnt. \n" +
+                        "Overall this project really demonstrates my knowledge of Azure and how I can further improve on my skills.",
+      image:            "../images/Azure-logo.png",
+      tech:             ["Microsoft Azure", "Web application", "Databases", "School Project"],
+      extraTech:        ["Resource management", "Project management", "Monitoring", "Documentation"],
+      link:             "../Documents/MiniCFL_Azure_Documentation.pdf",
+      linkLabel:        "Download Documentation",
+      status:           "complete",
+      date:             null,
+      featured:         true
+    },
+    {
+      id:               "proxmox-vmware-snapshots-template",
+      title:            "Installation of Proxmox and VMWare - Specialisation : Snapshots & Templates",
+      description:      "Documentation of Proxmox and VMWare installation, features and how to use them. Our specialisation was about both hypervisors snapshots and VM templates functions.",
+      fullDescription:  "This project involved setting up a VMWare server with a vSphere client and Proxmox Server. \n" +
+                        "We documented important features, like surrounding the setting up of VMs, backing them up, migrating them. \n" +
+                        "Our specialisation was that of snapshots and VM templates and using them in detail with further documentation. \n" +
+                        "At the end a presentation was given to demonstrate the usage of these specialisation and presenting how they worked underneath. \n\n" +
+                        "The final grade is yet to be given.",
+      reflection:       "This project was very good and taught me much about how to use Hypervisors with it's different features and how to manage VMs with a type 1 hypervisor." +
+                        "I'm quite satisfied with the outcome, however some internal complications made it a bit more stressful.",
+      image:            "../images/Proxmox_VMWare.png",
+      tech:             ["Server Configuration", "Proxmox", "VMWare","School Project"],
+      extraTech:        ["Hypervisor configuration", "VM Configuration", "Documentation"],
+      link:             "../Documents/Proxmox_VMWare_Snapshots_Templates_Documentation.pdf",
+      linkLabel:        "Download Documentation",
+      secondaryLink:      "../Documents/Proxmox_VMWare_Snapshots_Templates_Presentation.pdf",
+      secondaryLinkLabel: "Download Presentation",
+      status:           "complete",
+      date:             "22/06/2026",
+      featured:         true
+    },
     {
       id:               "rockstor-nas",
       title:            "Server Installation with Rockstor NAS and hardware RAID",
@@ -90,7 +169,7 @@ const PORTFOLIO = {
                         "Additionally, a hardware RAID configuration was set up to provide redundancy and data protection. \n" +
                         "The server was then configured to run Rockstor NAS system, which provides a web interface for managing storage and RAID configurations. \n" +
                         "The project was documented in a report and a presentation was given to demonstrate the software RAID configuration and the Rockstor NAS system. \n\n" +
-                        "The final grade is yet to be given.",
+                        "Final Grade : 16/20",
       reflection:       "This project was an amazing learning experience. I learned a lot about server hardware, RAID configurations, and accessing storages over the network. " +
                         "I'm happy with the result and the knowledge I gained from this project.",
       image:            "../images/rockstor-logo.png",
@@ -98,8 +177,11 @@ const PORTFOLIO = {
       extraTech:        ["Storage Management", "Research", "Documentation"],
       link:             "../Documents/Rockstor_Installation_Documentation.pdf",
       linkLabel:        "Download Documentation",
+      secondaryLink:      "../Documents/RockstorNAS_Presentation.pdf",
+      secondaryLinkLabel: "Download Presentation",
       status:           "complete",
-      date:             "13/04/2026"
+      date:             "13/04/2026",
+      featured:         true
     },
     {
       id:               "vpn-setup",
@@ -109,7 +191,7 @@ const PORTFOLIO = {
                         "The goal was to provide secure remote access to the organization's network. \n\n " +
                         "This project was done with another student as part of a school group project. " +
                         "We worked together to research, configure, and document the setup process. \n\n " +
-                        "The final grade was 6.3 out of 8.",
+                        "Final Grade : 6.3/8",
       reflection:       "This project went really well, with only some mistakes in the setup of the network between the virtual machines. " +
                          "Overall it was a great learning experience and I'm happy with the result.",
       image:            "../images/windows_server.jpg",
@@ -117,17 +199,34 @@ const PORTFOLIO = {
       extraTech:        ["VPN", "DirectAccess", "Group Project", "Research", "Documentation"],
       link:             "../Documents/WindowsVPNProjectDocumentation.pdf",
       linkLabel:        "Download Documentation",
-      status:           "complete"
+      status:           "complete",
+      date:             "14/01/2026",
+      featured:         false
+    },
+    {
+      id:               "spinning-project",
+      title:            "Relai pour la Vie : Spinning - Monitor frontend",
+      description:      "A project for the \"Relai pour la vie\" for the LGK. We were responsible for creating the frontend for monitoring the spinning of the bikes, shown on the beamer and online leaderboard.",
+      fullDescription:  "This project was a group project among our class, using all types of technologies, hardware, backend and administration. \n" +
+                        "The part I was responsible with another teammate was creating a frontend screen which showed the statistics of the bikes and which student is currently using which bike. \n" +
+                        "This frontend was all using data from the backend given to us, using SvelteKit as framework for dynamic data.",
+      reflection:       "This project was very helpful for me to create distinctions between components of a web application like backend and frontend",
+      image:            "../images/SvelteKit-logo.png",
+      tech:             ["Web Application", "SvelteKit", "School Project"],
+      extraTech:        ["Front-End", "Framework", "GitHub"],
+      link:             "https://github.com/biren9/spinning",
+      linkLabel:        "View GitHub Repository",
+      status:           "wip"
     },
     {
       id:               "steam-viewer",
-      title:            "PowerApps & Power Automate — Steam Achievement Viewer",
+      title:            "PowerApps & Power Automate - Steam Achievement Viewer",
       description:      "An application built with Power Apps & Power Automate to view Steam achievements for any game.",
       fullDescription:  "This project involved building an application using Power Apps and Power Automate to view Steam achievements for any game. \n" +
                         "Power Automate was used with the Steam API to retrieve data from the Steam platform. \n" +
                         "The data was stored within Dataverse for easy access and management. \n" +
                         "With the application you were able to view all your games in a list and progress of achievements, by clicking on a game you were able to view a list of achievements and their completion status. \n\n" +
-              "The application isn't published due to limitations with the Power Apps environme          nts and slowness of the Power Automate flow.",
+                        "The application isn't published due to limitations with the Power Apps environme          nts and slowness of the Power Automate flow.",
       reflection:       "This project was quite fun to work on with the Steam API, however it was frustrating trying to find a way to store the information in a way that was accessible with the resources provided. " +
                         "Overall I'm quite happy with the outcome but would rather not have to deal with Power Apps again.",
       image:            "../images/Powerapps-logo.png",
@@ -135,21 +234,7 @@ const PORTFOLIO = {
       extraTech:        ["Steam API", "Power Automate", "Dataverse", "Power Apps"],
       link:             "../Documents/SteamAchievementViewer.pdf",
       linkLabel:        "Download Presentation",
-      status:           "complete"
-    },
-    {
-      id:               "log-analyser",
-      title:            "Python Log Analyser",
-      description:      "A Python script to analyse Minecraft server logs — tracks user authentication, logins, and logouts.",
-      fullDescription:  "This project involved creating a Python script to analyse Minecraft server logs. " +
-                        "The script tracks user authentication, logins, and logouts. " +
-                        "The script was created as part of a school project to learn about Python and log analysis.",
-      reflection:       "This project was very small, so I won't go into too much detail and there is no documentation for it, however it was a good way of learning how to get logs remotely using Python.",
-      image:            "../images/Python-logo.png",
-      tech:             ["Python", "School Project"],
-      extraTech:        [],
-      link:             null,
-      linkLabel:        null,
+      date:             "22/01/2026",
       status:           "complete"
     },
     {
@@ -269,6 +354,16 @@ const PORTFOLIO = {
 
     speakers: [
       {
+        name:        "Arnaud Charlier",
+        description: "Held courses and workshops on AWS and Well Architected Framework, showed us the main Elements within AWS and how they function",
+        learnings: [
+          "AWS' Well Architected Framework",
+          "How to manage S3 Buckets and other storage services",
+          "AWS workshops to show how to create and manage VPCs, Subnets and gateways",
+          "Alot more services, like containers, monitoring and compute within AWS"
+        ]   
+      },
+      {
         name:        "Xavier Nix",
         description: "Provided in-depth training on Microsoft Azure Fundamentals and guided our class through preparation for the AZ-900 certification exam. \n" + 
         "Covered one lecture for the PL-900 course about the Power Platform fundamentals. \n" +
@@ -284,7 +379,9 @@ const PORTFOLIO = {
     ],
 
     smallerSpeakers: [
-      { name: "Alain Hitzig",    topic: "Quantum Computing",    date: "03/03/2026",
+      { name: "Jamey Jager",     topic: "Project Management",    date: "04/06/2026 + 09/06/2026",
+        description: "Lectures on how Project Management is done in a professional environment using OKR, KPI, Milestones and GTD" },
+      { name: "Alain Hirtzig",    topic: "Quantum Computing",    date: "03/03/2026",
         description: "Introduction to quantum computing principles, applications, and future implications for cloud infrastructure and risks in cybersecurity." },
       { name: "Christian Stemmler", topic: "Cloud Sustainability", date: "06/01/2026",
         description: "Lecture on the environmental impact of cloud computing and how the industry is working towards more sustainable infrastructure." },
@@ -303,6 +400,7 @@ const PORTFOLIO = {
   //     courses[]:   { name, description } — individual subjects/modules
   //   reflection:    personal reflection paragraph (null to hide)
   // onlineCourses[]: self-study courses, platforms, etc.
+  //   date:          completion date shown top-right of the row (null to hide)
   learningPath: {
     education: [
       {
@@ -333,22 +431,25 @@ const PORTFOLIO = {
     ],
     onlineCourses: [
       {
+        title:         "AZ-104: Microsoft Azure Administrator Associate",
+        platform:      "Pluralsight",
+        date:          null,                       // completion date, e.g. "May 2026" (null to hide)
+        description:   "Courses covering main Azure administrative components, including VMs, Containers, Web app services. Additionally User management, RBAC and Administrative units. (In Progress)",
+        progressImage: "../images/AZ104-progress.png",
+        examImage:     null
+      },
+      {
         title:         "AZ-900: Microsoft Azure Fundamentals",
         platform:      "Pluralsight",
+        date:          "26/01/2026",
         description:   "Courses covering Azure fundamentals, including cloud concepts, Azure services and architecture, identity and management, security, deployment, and governance.",
         progressImage: "../images/AZ900-progress.png",   // path to course progress screenshot, e.g. "../images/az900-progress.png"
         examImage:     "../images/AZ900-testexam.png"    // path to exam/test results screenshot, e.g. "../images/az900-exam.png"
       },
       {
-        title:         "AZ-040: Microsoft Azure Administration",
-        platform:      "Pluralsight",
-        description:   "Courses covering Azure administration, including virtual machines, storage, networking, and identity management. (In Progress)",
-        progressImage: null,
-        examImage:     null
-      },
-      {
         title:         "The System Administrator's Guide to Bash Scripting",
         platform:      "Pluralsight",
+        date:          null,
         description:   "Courses covering Bash scripting, including basic commands, file operations, and automation scripts. (In Progress)",
         progressImage: "../images/BASH-progress.png",
         examImage:     null
@@ -356,6 +457,7 @@ const PORTFOLIO = {
       {
         title:         "Cloud Computing Fundamentals",
         platform:      "Pluralsight Skill IQ",
+        date:          "26/01/2026",
         description:   "Test on my knowledge of cloud computing fundamentals. Score: Proficient Average",
         progressImage: null,
         examImage:     "../images/CCFundamentals-SkillIQ.png"
