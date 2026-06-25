@@ -318,9 +318,9 @@ function populateSkills() {
 
   container.appendChild(groups);
 
-  // Show only 2 rows, with the rest behind a "Show more" toggle.
+  // Show only 1 row, with the rest behind a "Show more" toggle.
   // Column count is responsive, so derive it from the rendered grid.
-  const ROWS = 2;
+  const ROWS = 1;
   const btn = el('button', 'show-more-btn');
   container.appendChild(btn);
   section.appendChild(container);
@@ -344,7 +344,8 @@ function populateSkills() {
   const applyCollapsed = () => {
     const visible = colCount() * ROWS;
     cards.forEach((card, idx) => {
-      card.classList.remove('skill-revealing');
+      card.classList.remove('skill-revealing', 'skill-hiding');
+      card.style.animationDelay = '';
       card.style.display = idx < visible ? '' : 'none';
     });
     updateBtn();
@@ -357,11 +358,12 @@ function populateSkills() {
       let revealIdx = 0;
       cards.forEach((card, idx) => {
         if (idx < startIdx) return;
+        card.classList.remove('skill-hiding');
         card.style.display = '';
         // Cascade the newly shown cards in to fill the space
         card.classList.remove('skill-revealing');
         void card.offsetWidth; // restart the animation if it already played
-        card.style.animationDelay = `${revealIdx * 60}ms`;
+        card.style.animationDelay = `${revealIdx * 55}ms`;
         card.classList.add('skill-revealing');
         card.addEventListener('animationend', () => {
           card.classList.remove('skill-revealing');
@@ -371,7 +373,21 @@ function populateSkills() {
       });
       updateBtn();
     } else {
-      applyCollapsed();
+      // Cascade the extra cards out (reverse order), then hide once faded
+      const startIdx = colCount() * ROWS;
+      const hiding = cards.filter((card, idx) => idx >= startIdx && card.style.display !== 'none');
+      hiding.reverse().forEach((card, i) => {
+        card.classList.remove('skill-revealing');
+        void card.offsetWidth;
+        card.style.animationDelay = `${i * 35}ms`;
+        card.classList.add('skill-hiding');
+        card.addEventListener('animationend', () => {
+          card.classList.remove('skill-hiding');
+          card.style.animationDelay = '';
+          card.style.display = 'none';
+        }, { once: true });
+      });
+      updateBtn();
     }
   });
 
@@ -489,27 +505,38 @@ function populateCertifications() {
 
     btn.addEventListener('click', () => {
       showingAll = !showingAll;
-      let revealIdx = 0;
-      grid.querySelectorAll('.cert-card').forEach((card, idx) => {
-        if (PORTFOLIO.certifications[idx]?.priority) return;
+      const extraCards = [...grid.querySelectorAll('.cert-card')]
+        .filter((card, idx) => !PORTFOLIO.certifications[idx]?.priority);
 
-        if (showingAll) {
+      if (showingAll) {
+        // Stagger each newly shown card so they cascade in to fill the space
+        extraCards.forEach((card, i) => {
+          card.classList.remove('cert-hiding');
           card.style.display = '';
-          // Stagger each newly shown card so they cascade in to fill the space
           card.classList.remove('cert-revealing');
           void card.offsetWidth; // restart the animation if it was already played
-          card.style.animationDelay = `${revealIdx * 60}ms`;
+          card.style.animationDelay = `${i * 60}ms`;
           card.classList.add('cert-revealing');
           card.addEventListener('animationend', () => {
             card.classList.remove('cert-revealing');
             card.style.animationDelay = '';
           }, { once: true });
-          revealIdx++;
-        } else {
+        });
+      } else {
+        // Cascade the extra cards out (reverse order), then hide once faded
+        extraCards.slice().reverse().forEach((card, i) => {
           card.classList.remove('cert-revealing');
-          card.style.display = 'none';
-        }
-      });
+          void card.offsetWidth;
+          card.style.animationDelay = `${i * 40}ms`;
+          card.classList.add('cert-hiding');
+          card.addEventListener('animationend', () => {
+            card.classList.remove('cert-hiding');
+            card.style.animationDelay = '';
+            card.style.display = 'none';
+          }, { once: true });
+        });
+      }
+
       btn.innerHTML = showingAll
         ? `Show fewer ▴`
         : `Show ${extraCount} more ▾`;

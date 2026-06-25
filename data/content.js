@@ -137,9 +137,12 @@ const PORTFOLIO = {
                         "For this we used a VM running a database with an App service created out of a Azure Contair Registry image to make the database. The updates for the train were done using Azure functions. \n" +
                         "Alongside, we created policies, groups, RBAC assignments, budgets and used monitoring resources to demonstrate further our knowledge of Azure. \n\n" +
                         "The GitHub is private which container the image for the ACR, so I can't show it here. \n" +
+                        "The app is accessible with this link: \n " +
+                        "<a href='https://app-minicfl-web-dev-dwb4h6cnahghd2cs.francecentral-01.azurewebsites.net/' target='_blank' rel='noopener'>Here</a> \n" +
+                        "(May not be accessible if the app has been shut off to save on costs)^\n" +
                         "The final grade is yet to be given.",
       reflection:       "This project, despite needing to be done within a short time, went really well, some issues arose where we needed to solve ourselves using what we learnt. \n" +
-                        "Overall this project really demonstrates my knowledge of Azure and how I can further improve on my skills.",
+                        "Overall this project really demonstrates my knowledge and usage of Azure. It also shows how I can further improve on my skills within Cloud area.",
       image:            "../images/Azure-logo.png",
       images:           { folder : "../images/project-minicfl", ext : "png"},   // e.g. { folder: "../images/minicfl", ext: "png" }
       tech:             ["Microsoft Azure", "Web application", "Databases", "School Project"],
@@ -147,7 +150,7 @@ const PORTFOLIO = {
       link:             "../Documents/MiniCFL_Azure_Documentation.pdf",
       linkLabel:        "Download Documentation",
       status:           "complete",
-      date:             null,
+      date:             "25/06/2026",
       featured:         true
     },
     {
@@ -162,6 +165,7 @@ const PORTFOLIO = {
       reflection:       "This project was very good and taught me much about how to use Hypervisors with it's different features and how to manage VMs with a type 1 hypervisor." +
                         "I'm quite satisfied with the outcome, however some internal complications made it a bit more stressful.",
       image:            "../images/Proxmox_VMWare.png",
+      images:           null,
       tech:             ["Server Configuration", "Proxmox", "VMWare","School Project"],
       extraTech:        ["Hypervisor configuration", "VM Configuration", "Documentation"],
       link:             "../Documents/Proxmox_VMWare_Snapshots_Templates_Documentation.pdf",
@@ -412,7 +416,6 @@ const PORTFOLIO = {
   // education[]:     formal studies
   //   subjects[]:    semesters — each has a semester label and a courses[] array
   //     courses[]:   { name, description } — individual subjects/modules
-  //   reflection:    personal reflection paragraph (null to hide)
   // onlineCourses[]: self-study courses, platforms, etc.
   //   date:          completion date shown top-right of the row (null to hide)
   learningPath: {
@@ -433,14 +436,11 @@ const PORTFOLIO = {
           {
             semester: "Semester 2",
             highlights: "Highlight of this semester was working on physical servers and working on projects related to virtualization. Also more in depth knowledge into Cloud systems and actually using these tools we learnt about.\n" +
-            "We're learning to be more hands-on and work with real hardware and software."
+            "We're learning to be more hands-on and work with real hardware and software. \n" +
+            "Further we have gone a lot more in depth in Azure and Virtualisation with Proxmox and VMWare"
           }
           // add more semesters: { semester: "Semester 3", highlights: "..." }
-        ],
-        reflection: "During my BTS Studies, I have learned a lot about many topics that have interested me. Having more focus on the technical side rather than the theoretical side has helped me understand these concepts better.\n" +
-          "During the time I have been able to use my strength in problem-solving and fast learning to understand the complex topics, we're learning about.\n" +
-          "Working with the class and collaborating on projects has been a great experience to improve my weakness in communication. Also the projects have helped me in learning how to plan myself and manage my time better.\n\n" +
-          "All in all, I am very happy to have switched my studies to this field, I hope to further my knowledge and skills during the 2 last semesters." // your personal reflection on the programme overall
+        ]
       }
     ],
     onlineCourses: [

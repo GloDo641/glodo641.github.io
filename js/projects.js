@@ -357,6 +357,12 @@ function openModal(proj) {
       im.loading = 'lazy';
       im.addEventListener('load', fitPreview);   // re-fit once dimensions known
       thumb.appendChild(im);
+
+      // Hover hint — makes it obvious the image is clickable
+      const hint = el('span', 'modal-preview-hint');
+      hint.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i> Click to expand';
+      thumb.appendChild(hint);
+
       thumb.addEventListener('click', () => openLightbox(i));
       modalPreviewStrip.appendChild(thumb);
     });

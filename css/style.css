@@ -585,12 +585,23 @@ img { display: block; max-width: 100%; }
 /* Staggered reveal when "Show more" expands a grid (certs + skills) */
 .cert-card.cert-revealing,
 .skill-card.skill-revealing {
-  animation: card-reveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: card-reveal 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Staggered fade-out when "Show fewer" collapses a grid (certs + skills) */
+.cert-card.cert-hiding,
+.skill-card.skill-hiding {
+  animation: card-hide 0.32s cubic-bezier(0.4, 0, 0.6, 1) both;
 }
 
 @keyframes card-reveal {
   from { opacity: 0; transform: translateY(18px) scale(0.96); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes card-hide {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(12px) scale(0.96); }
 }
 
 .cert-badge {
@@ -1391,6 +1402,7 @@ footer {
 }
 
 .modal-preview-thumb {
+  position: relative;
   width: 100%;
   padding: 0;
   border: 1px solid var(--border);
@@ -1411,6 +1423,33 @@ footer {
   display: block;
   width: 100%;
   height: auto;
+  transition: filter var(--transition);
+}
+
+/* Dim the image on hover */
+.modal-preview-thumb:hover img {
+  filter: brightness(0.55);
+}
+
+/* "Click to expand" hint overlay — hidden until hover */
+.modal-preview-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-bright);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.modal-preview-thumb:hover .modal-preview-hint {
+  opacity: 1;
 }
 
 .modal-preview-more {
@@ -1938,16 +1977,3 @@ footer {
   line-height: 1.7;
 }
 
-/* ── Personal Reflection ──────────────────────────────── */
-.lpath-reflection {
-  margin-top: 1.75rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.lpath-reflection-text {
-  font-size: 15px;
-  color: var(--text);
-  line-height: 1.8;
-  font-style: italic;
-}

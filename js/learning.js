@@ -124,16 +124,6 @@ function buildEduCard(edu) {
     card.appendChild(wrap);
   }
 
-  // Personal Reflection
-  if (edu.reflection) {
-    const wrap = el('div', 'lpath-reflection');
-    wrap.appendChild(el('div', 'lpath-block-label', 'Personal Reflection'));
-    const p = el('p', 'lpath-reflection-text');
-    p.innerHTML = edu.reflection.replace(/\n/g, '<br>');
-    wrap.appendChild(p);
-    card.appendChild(wrap);
-  }
-
   return card;
 }
 
