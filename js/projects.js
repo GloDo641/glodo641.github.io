@@ -66,7 +66,14 @@ const STATUS_MAP = {
 
 let modalBackdrop, modalTitle, modalStatus,
     modalDesc, modalReflectionWrap, modalReflection,
-    modalTags, modalDownload, modalDownload2;
+    modalTags, modalDownload, modalDownload2,
+    modalPreview, modalPreviewStrip, modalPreviewMore;
+
+// Lightbox (full-screen image viewer) state
+let lightboxBackdrop, lightboxImg, lightboxCounter, lightboxPrev, lightboxNext;
+let galleryImages = [];
+let galleryIndex  = 0;
+let galleryToken  = 0;   // guards against a slower modal resolving after a newer one opens
 
 function buildModal() {
   modalBackdrop = el('div', 'modal-backdrop');
@@ -118,6 +125,16 @@ function buildModal() {
   tagsWrap.appendChild(modalTags);
   right.appendChild(tagsWrap);
 
+  // Image preview gallery — sits between the tags and the download buttons.
+  // Shows as many thumbnails as fit on one row; the rest are summarised as "+N more".
+  modalPreview = el('div', 'modal-preview');
+  modalPreview.appendChild(el('div', 'modal-section-label', 'Preview'));
+  modalPreviewStrip = el('div', 'modal-preview-strip');
+  modalPreview.appendChild(modalPreviewStrip);
+  modalPreviewMore = el('div', 'modal-preview-more');
+  modalPreview.appendChild(modalPreviewMore);
+  right.appendChild(modalPreview);
+
   // Download buttons stacked together at the bottom of the column
   const downloads = el('div', 'modal-downloads');
 
@@ -143,10 +160,155 @@ function buildModal() {
   });
 
   document.addEventListener('keydown', e => {
+    // When the lightbox is open it captures the keys (arrows navigate, Esc closes it)
+    if (lightboxBackdrop && lightboxBackdrop.classList.contains('open')) {
+      if (e.key === 'Escape')          closeLightbox();
+      else if (e.key === 'ArrowLeft')  showLightbox(galleryIndex - 1);
+      else if (e.key === 'ArrowRight') showLightbox(galleryIndex + 1);
+      return;
+    }
     if (e.key === 'Escape') closeModal();
   });
 
+  // Re-fit the preview thumbnails when the window is resized while the modal is open
+  window.addEventListener('resize', () => {
+    if (modalBackdrop.classList.contains('open')) fitPreview();
+  });
+
   document.body.appendChild(modalBackdrop);
+
+  buildLightbox();
+}
+
+/* ── LIGHTBOX (full-screen image viewer) ─────────────────── */
+
+function buildLightbox() {
+  lightboxBackdrop = el('div', 'lightbox-backdrop');
+  lightboxBackdrop.setAttribute('role', 'dialog');
+  lightboxBackdrop.setAttribute('aria-modal', 'true');
+  lightboxBackdrop.setAttribute('aria-label', 'Image viewer');
+
+  const closeBtn = el('button', 'lightbox-close', '✕');
+  closeBtn.setAttribute('aria-label', 'Close');
+  closeBtn.addEventListener('click', closeLightbox);
+
+  lightboxPrev = el('button', 'lightbox-nav lightbox-prev');
+  lightboxPrev.innerHTML = '&#10094;';
+  lightboxPrev.setAttribute('aria-label', 'Previous image');
+  lightboxPrev.addEventListener('click', e => {
+    e.stopPropagation();
+    showLightbox(galleryIndex - 1);
+  });
+
+  lightboxNext = el('button', 'lightbox-nav lightbox-next');
+  lightboxNext.innerHTML = '&#10095;';
+  lightboxNext.setAttribute('aria-label', 'Next image');
+  lightboxNext.addEventListener('click', e => {
+    e.stopPropagation();
+    showLightbox(galleryIndex + 1);
+  });
+
+  lightboxImg = document.createElement('img');
+  lightboxImg.className = 'lightbox-img';
+  lightboxImg.alt = '';
+
+  lightboxCounter = el('div', 'lightbox-counter');
+
+  lightboxBackdrop.append(closeBtn, lightboxPrev, lightboxImg, lightboxNext, lightboxCounter);
+
+  // Click on the dark area (not the image/buttons) closes the viewer
+  lightboxBackdrop.addEventListener('click', e => {
+    if (e.target === lightboxBackdrop) closeLightbox();
+  });
+
+  document.body.appendChild(lightboxBackdrop);
+}
+
+// Show image at index i (wraps around the gallery)
+function showLightbox(i) {
+  const n = galleryImages.length;
+  if (n === 0) return;
+  galleryIndex = (i + n) % n;
+  lightboxImg.src = galleryImages[galleryIndex];
+  lightboxCounter.textContent = `${galleryIndex + 1} / ${n}`;
+
+  // Hide navigation when there is only one image
+  const single = n <= 1;
+  lightboxPrev.style.display = single ? 'none' : '';
+  lightboxNext.style.display = single ? 'none' : '';
+  lightboxCounter.style.display = single ? 'none' : '';
+}
+
+function openLightbox(i) {
+  showLightbox(i);
+  lightboxBackdrop.classList.add('open');
+}
+
+function closeLightbox() {
+  lightboxBackdrop.classList.remove('open');
+}
+
+// Probe a single image URL — resolves true if it loads, false on error
+function probeImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload  = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+}
+
+// Work out which images a project actually has.
+//   - { folder, ext, max }  → probes folder/1.ext, folder/2.ext … until one is missing
+//   - an array of paths     → used as-is (explicit list, still supported)
+async function resolveGalleryImages(spec) {
+  if (!spec) return [];
+  if (Array.isArray(spec)) return spec;
+
+  const { folder, ext = 'png', max = 50 } = spec;
+  if (!folder) return [];
+
+  const base = folder.replace(/\/+$/, '');   // strip any trailing slash
+  const found = [];
+  for (let i = 1; i <= max; i++) {
+    const src = `${base}/${i}.${ext}`;
+    // Sequential on purpose: stop as soon as a number is missing
+    // eslint-disable-next-line no-await-in-loop
+    if (await probeImage(src)) found.push(src);
+    else break;
+  }
+  return found;
+}
+
+// Show only as many full-width thumbnails as fit the column's height;
+// summarise the rest as "+N more"
+function fitPreview() {
+  if (!modalPreview || modalPreview.style.display === 'none') return;
+  const thumbs = [...modalPreviewStrip.children];
+  if (thumbs.length === 0) return;
+
+  thumbs.forEach(t => (t.style.display = ''));
+
+  const limit = modalPreviewStrip.clientHeight;
+  let overflowing = false;
+  let hidden = 0;
+
+  thumbs.forEach((t, idx) => {
+    if (overflowing) {
+      t.style.display = 'none';
+      hidden++;
+      return;
+    }
+    // Always keep the first thumbnail; hide once one spills past the bottom
+    if (idx > 0 && t.offsetTop + t.offsetHeight > limit + 1) {
+      t.style.display = 'none';
+      overflowing = true;
+      hidden++;
+    }
+  });
+
+  modalPreviewMore.textContent =
+    hidden > 0 ? `+${hidden} more image${hidden > 1 ? 's' : ''}` : '';
 }
 
 function openModal(proj) {
@@ -171,6 +333,35 @@ function openModal(proj) {
   modalTags.innerHTML = '';
   const allTags = [...(proj.tech || []), ...(proj.extraTech || [])];
   allTags.forEach(t => modalTags.appendChild(el('span', 'tech-tag', t)));
+
+  // Preview gallery — image paths are discovered from the folder, so resolution
+  // is async; populate the thumbnails once we know which files exist.
+  modalPreviewStrip.innerHTML = '';
+  modalPreviewMore.textContent = '';
+  modalPreview.style.display = 'none';
+  galleryImages = [];
+
+  const token = ++galleryToken;
+  resolveGalleryImages(proj.images).then(imgs => {
+    if (token !== galleryToken) return;   // a newer modal was opened meanwhile
+    galleryImages = imgs;
+    if (!imgs.length) return;
+
+    modalPreview.style.display = '';
+    imgs.forEach((src, i) => {
+      const thumb = el('button', 'modal-preview-thumb');
+      thumb.type = 'button';
+      const im = document.createElement('img');
+      im.src = src;
+      im.alt = `${proj.title} — preview ${i + 1}`;
+      im.loading = 'lazy';
+      im.addEventListener('load', fitPreview);   // re-fit once dimensions known
+      thumb.appendChild(im);
+      thumb.addEventListener('click', () => openLightbox(i));
+      modalPreviewStrip.appendChild(thumb);
+    });
+    requestAnimationFrame(fitPreview);
+  });
 
   // Download button
   if (proj.link) {

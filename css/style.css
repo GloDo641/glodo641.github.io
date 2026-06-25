@@ -563,13 +563,41 @@ img { display: block; max-width: 100%; }
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+  transition: transform var(--transition), border-color var(--transition),
+              box-shadow var(--transition);
 }
 
+.cert-card-clickable {
+  cursor: pointer;
+}
+
+/* Cert cards hold links, so a subtle lift on hover is intentional here */
+.cert-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.cert-card:hover .cert-badge {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+/* Staggered reveal when "Show more" expands a grid (certs + skills) */
+.cert-card.cert-revealing,
+.skill-card.skill-revealing {
+  animation: card-reveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes card-reveal {
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
 
 .cert-badge {
   width: 80px;
   height: 80px;
   object-fit: contain;
+  transition: transform var(--transition);
 }
 
 .cert-issuer {
@@ -1351,9 +1379,132 @@ footer {
   font-style: italic;
 }
 
+/* ── Modal preview gallery ───────────────────────────────── */
+/* Thumbnails stacked in a single full-width column; as many as fit
+   the available height are shown, the rest summarised as "+N more". */
+.modal-preview-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 22rem;
+  overflow: hidden;
+}
+
+.modal-preview-thumb {
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 0;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.modal-preview-thumb:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.modal-preview-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.modal-preview-more {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── Lightbox (full-screen image viewer) ─────────────────── */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Big view — capped to the viewport, never enlarged past natural size */
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 88vh;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.lightbox-nav:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.lightbox-prev { left: 1.5rem; }
+.lightbox-next { right: 1.5rem; }
+
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.lightbox-close:hover { color: var(--accent); }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.3rem 0.8rem;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
 @media (max-width: 640px) {
   .modal-body { grid-template-columns: 1fr; }
   .modal-box  { padding: 1.5rem; }
+  .lightbox-prev { left: 0.5rem; }
+  .lightbox-next { right: 0.5rem; }
 }
 
 /* ── CV SUMMARY MODAL ────────────────────────────────────── */

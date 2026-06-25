@@ -67,8 +67,9 @@ const PORTFOLIO = {
     { category: "networking/",     items: ["Cisco", "IT Infrastructure", "VPN", "DHCP", "Database Design"] },
     { category: "programming/",    items: ["Java", "Python"] },
     { category: "scripting/",      items: ["Bash", "PowerShell"] },
+    { category: "security/",       items: ["Risk Analysis", "Threat awareness", "Incident Response"] },
     { category: "office/",         items: ["Microsoft Word", "Microsoft Excel", "Microsoft PowerPoint"] },
-    { category: "management/",     items: ["SCRUM", "Resource Planning", "Documentation"] },
+    { category: "management/",     items: ["SCRUM", "Resource Planning", "Documentation", "OKR / KPI / GTD"] },
     { category: "other/",          items: ["Power Apps", "Power Automate"] }
   ],
 
@@ -113,12 +114,22 @@ const PORTFOLIO = {
   // fullDescription: longer text shown in the detail pop-up (falls back to description)
   // reflection:      personal reflection shown in pop-up (omit or null to hide)
   // image:           path to a project image, e.g. "../images/project-rockstor.jpg" (null to hide)
+  // images:          OPTIONAL pop-up PREVIEW gallery, loaded automatically from a folder.
+  //                  Put the images in their own folder under images/ and NAME THEM
+  //                  1.<ext>, 2.<ext>, 3.<ext> … in order (no gaps), then point to it:
+  //                    images: { folder: "../images/minicfl", ext: "png" }
+  //                  "ext" defaults to "png" if omitted. Loading stops at the first
+  //                  missing number, so keep them sequential (1, 2, 3 …).
+  //                  The pop-up shows as many thumbnails as fit on one row, then "+N more".
+  //                  Click any thumbnail to open the full-screen viewer (← / → keys or the
+  //                  on-screen arrows to flick through, Esc to close). Omit/null to hide.
+  //                  (An explicit array of full paths, e.g. ["../images/a.png"], also works.)
   // tech:            MAIN tags — appear in the row AND in the search filter pills
   // extraTech:       EXTRA tags — appear only inside the detail pop-up
   projects: [
     {
       id:               "minicfl-azure-project",
-      title:            "Azure deployment and resource management - MiniCFL",
+      title:            "Azure deployment and resource management - MiniCFL Application",
       description:      "A project where we utilise what we learnt during our AZ-104 training and create a real application within Azure.",
       fullDescription:  "This project involved using Azure resources to create a web application with access to a database \n" +
                         "It's primary purpose was to demonstrate our skills in Azure and how we've grown in its usage. \n" +
@@ -130,8 +141,9 @@ const PORTFOLIO = {
       reflection:       "This project, despite needing to be done within a short time, went really well, some issues arose where we needed to solve ourselves using what we learnt. \n" +
                         "Overall this project really demonstrates my knowledge of Azure and how I can further improve on my skills.",
       image:            "../images/Azure-logo.png",
+      images:           { folder : "../images/project-minicfl", ext : "png"},   // e.g. { folder: "../images/minicfl", ext: "png" }
       tech:             ["Microsoft Azure", "Web application", "Databases", "School Project"],
-      extraTech:        ["Resource management", "Project management", "Monitoring", "Documentation"],
+      extraTech:        ["Resource management", "Project management", "Monitoring", "Documentation", "User Management"],
       link:             "../Documents/MiniCFL_Azure_Documentation.pdf",
       linkLabel:        "Download Documentation",
       status:           "complete",
@@ -196,7 +208,7 @@ const PORTFOLIO = {
                          "Overall it was a great learning experience and I'm happy with the result.",
       image:            "../images/windows_server.jpg",
       tech:             ["Windows Server 2022", "Server Configuration","School Project"],
-      extraTech:        ["VPN", "DirectAccess", "Group Project", "Research", "Documentation"],
+      extraTech:        ["VPN", "DirectAccess", "Research", "Documentation"],
       link:             "../Documents/WindowsVPNProjectDocumentation.pdf",
       linkLabel:        "Download Documentation",
       status:           "complete",
@@ -242,12 +254,14 @@ const PORTFOLIO = {
       title:            "Game Server Hosting Web Application",
       description:      "A planned web application that will allow users to host servers for a selection of games.",
       fullDescription:  "This is a work in progress project that aims to create a web application that will allow users to host servers for a selection of games.\n\n" +
-                        "The application will allow users to select a game, configure server settings, and deploy a server with a single click.\n\n" +
-                        "The application is being built using Linux Server, Docker, and a Web Application.",
+                        "The application will allow users to select a game, configure server settings, and deploy a server without needing to manage the services underneath.\n\n" +
+                        "The application is being built using Linux Server, Docker, and a Web Application.\n\n" +
+                        "The current status of the project is still minimal progress, since I have made it more of a mission to secure my server and plan on how I want to host this application\n" +
+                        "It has more developed into a Home Lab project, since I want this server to also host my own applications for my own use and to try out new technologies.",
       reflection:       null,
       image:            null,
-      tech:             ["Linux Server", "Docker", "Web Application", "School Project"],
-      extraTech:        [],
+      tech:             ["Linux", "Docker", "Web Application", "SvelteKit", "Personal Project"],
+      extraTech:        ["Project Management", "Documentation"],
       link:             null,
       linkLabel:        null,
       status:           "wip"

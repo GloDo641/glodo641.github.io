@@ -290,11 +290,13 @@ function populateSkills() {
     'networking/':  { label: 'Networking',  icon: 'fa-solid fa-network-wired'  },
     'programming/': { label: 'Programming', icon: 'fa-solid fa-code'           },
     'scripting/':   { label: 'Scripting',   icon: 'fa-solid fa-terminal'       },
+    'security/':    { label: 'Security',    icon: 'fa-solid fa-shield'         },
     'office/':      { label: 'Office',      icon: 'fa-solid fa-briefcase'      },
     'management/':  { label: 'Management',  icon: 'fa-solid fa-list-check'     },
     'other/':       { label: 'Other',       icon: 'fa-solid fa-circle'         }
   };
 
+  const cards = [];
   PORTFOLIO.skills.forEach(skill => {
     const meta = categoryMeta[skill.category] || { label: skill.category.replace('/', ''), icon: 'fa-solid fa-circle' };
     const card = el('div', 'skill-card');
@@ -311,10 +313,79 @@ function populateSkills() {
     card.appendChild(tags);
 
     groups.appendChild(card);
+    cards.push(card);
   });
 
   container.appendChild(groups);
+
+  // Show only 2 rows, with the rest behind a "Show more" toggle.
+  // Column count is responsive, so derive it from the rendered grid.
+  const ROWS = 2;
+  const btn = el('button', 'show-more-btn');
+  container.appendChild(btn);
   section.appendChild(container);
+
+  let showingAll = false;
+
+  const colCount = () =>
+    Math.max(1, getComputedStyle(groups).gridTemplateColumns.split(' ').filter(Boolean).length);
+
+  const updateBtn = () => {
+    const visible = colCount() * ROWS;
+    const hidden = cards.length - visible;
+    if (hidden <= 0 && !showingAll) {
+      btn.style.display = 'none';
+    } else {
+      btn.style.display = '';
+      btn.innerHTML = showingAll ? `Show fewer ▴` : `Show ${hidden} more ▾`;
+    }
+  };
+
+  const applyCollapsed = () => {
+    const visible = colCount() * ROWS;
+    cards.forEach((card, idx) => {
+      card.classList.remove('skill-revealing');
+      card.style.display = idx < visible ? '' : 'none';
+    });
+    updateBtn();
+  };
+
+  btn.addEventListener('click', () => {
+    showingAll = !showingAll;
+    if (showingAll) {
+      const startIdx = colCount() * ROWS;
+      let revealIdx = 0;
+      cards.forEach((card, idx) => {
+        if (idx < startIdx) return;
+        card.style.display = '';
+        // Cascade the newly shown cards in to fill the space
+        card.classList.remove('skill-revealing');
+        void card.offsetWidth; // restart the animation if it already played
+        card.style.animationDelay = `${revealIdx * 60}ms`;
+        card.classList.add('skill-revealing');
+        card.addEventListener('animationend', () => {
+          card.classList.remove('skill-revealing');
+          card.style.animationDelay = '';
+        }, { once: true });
+        revealIdx++;
+      });
+      updateBtn();
+    } else {
+      applyCollapsed();
+    }
+  });
+
+  applyCollapsed();
+
+  // Re-derive the 2-row cutoff when the column count changes on resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (showingAll) updateBtn();
+      else applyCollapsed();
+    }, 150);
+  });
 }
 
 /* ── EXPLORE (redirection cards) ──────────────────────────── */
@@ -367,6 +438,15 @@ function populateCertifications() {
     const card = el('div', 'cert-card');
     if (!cert.priority) card.style.display = 'none';
 
+    // Whole card acts as a link to the badge page; inner links keep their own targets
+    if (cert.credlyLink) {
+      card.classList.add('cert-card-clickable');
+      card.addEventListener('click', e => {
+        if (e.target.closest('a')) return; // let real links handle their own clicks
+        window.open(cert.credlyLink, '_blank', 'noopener');
+      });
+    }
+
     card.appendChild(el('p', 'cert-issuer', cert.issuer));
 
     const img = document.createElement('img');
@@ -409,9 +489,25 @@ function populateCertifications() {
 
     btn.addEventListener('click', () => {
       showingAll = !showingAll;
+      let revealIdx = 0;
       grid.querySelectorAll('.cert-card').forEach((card, idx) => {
-        if (!PORTFOLIO.certifications[idx]?.priority) {
-          card.style.display = showingAll ? '' : 'none';
+        if (PORTFOLIO.certifications[idx]?.priority) return;
+
+        if (showingAll) {
+          card.style.display = '';
+          // Stagger each newly shown card so they cascade in to fill the space
+          card.classList.remove('cert-revealing');
+          void card.offsetWidth; // restart the animation if it was already played
+          card.style.animationDelay = `${revealIdx * 60}ms`;
+          card.classList.add('cert-revealing');
+          card.addEventListener('animationend', () => {
+            card.classList.remove('cert-revealing');
+            card.style.animationDelay = '';
+          }, { once: true });
+          revealIdx++;
+        } else {
+          card.classList.remove('cert-revealing');
+          card.style.display = 'none';
         }
       });
       btn.innerHTML = showingAll
